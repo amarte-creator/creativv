@@ -1,0 +1,108 @@
+<svg width="600" height="400" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#11998e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#38ef7d;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="chartGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="600" height="400" fill="url(#bgGradient)"/>
+  
+  <!-- Abstract geometric shapes -->
+  <circle cx="80" cy="80" r="35" fill="rgba(255,255,255,0.1)" opacity="0.6"/>
+  <circle cx="520" cy="100" r="25" fill="rgba(255,255,255,0.1)" opacity="0.4"/>
+  <circle cx="100" cy="320" r="20" fill="rgba(255,255,255,0.1)" opacity="0.5"/>
+  
+  <!-- Main dashboard mockup -->
+  <g transform="translate(50, 80)">
+    <!-- Dashboard background -->
+    <rect x="0" y="0" width="500" height="240" rx="15" fill="rgba(255,255,255,0.95)" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+    
+    <!-- Header -->
+    <rect x="0" y="0" width="500" height="40" rx="15" fill="url(#chartGradient)"/>
+    <text x="250" y="25" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="16" font-weight="bold">Business Intelligence Dashboard</text>
+    
+    <!-- Chart 1 - Bar Chart -->
+    <g transform="translate(30, 60)">
+      <text x="0" y="0" fill="#333" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Ventas Mensuales</text>
+      <rect x="0" y="10" width="15" height="40" fill="#667eea"/>
+      <rect x="20" y="10" width="15" height="60" fill="#667eea"/>
+      <rect x="40" y="10" width="15" height="35" fill="#667eea"/>
+      <rect x="60" y="10" width="15" height="70" fill="#667eea"/>
+      <rect x="80" y="10" width="15" height="50" fill="#667eea"/>
+      <rect x="100" y="10" width="15" height="80" fill="#667eea"/>
+    </g>
+    
+    <!-- Chart 2 - Line Chart -->
+    <g transform="translate(200, 60)">
+      <text x="0" y="0" fill="#333" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Tendencia de Crecimiento</text>
+      <path d="M 0 80 L 30 60 L 60 40 L 90 20 L 120 30 L 150 10" stroke="#38ef7d" stroke-width="3" fill="none"/>
+      <circle cx="0" cy="80" r="3" fill="#38ef7d"/>
+      <circle cx="30" cy="60" r="3" fill="#38ef7d"/>
+      <circle cx="60" cy="40" r="3" fill="#38ef7d"/>
+      <circle cx="90" cy="20" r="3" fill="#38ef7d"/>
+      <circle cx="120" cy="30" r="3" fill="#38ef7d"/>
+      <circle cx="150" cy="10" r="3" fill="#38ef7d"/>
+    </g>
+    
+    <!-- Chart 3 - Pie Chart -->
+    <g transform="translate(400, 60)">
+      <text x="0" y="0" fill="#333" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Distribución</text>
+      <circle cx="40" cy="50" r="30" fill="none" stroke="#667eea" stroke-width="20" stroke-dasharray="60 40 30 20 10"/>
+      <circle cx="40" cy="50" r="15" fill="#38ef7d"/>
+    </g>
+    
+    <!-- KPI Cards -->
+    <g transform="translate(30, 180)">
+      <rect x="0" y="0" width="100" height="40" rx="8" fill="url(#chartGradient)" opacity="0.8"/>
+      <text x="50" y="15" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">Ingresos</text>
+      <text x="50" y="30" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="14" font-weight="bold">$125K</text>
+    </g>
+    
+    <g transform="translate(150, 180)">
+      <rect x="0" y="0" width="100" height="40" rx="8" fill="url(#chartGradient)" opacity="0.8"/>
+      <text x="50" y="15" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">Clientes</text>
+      <text x="50" y="30" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="14" font-weight="bold">1,247</text>
+    </g>
+    
+    <g transform="translate(270, 180)">
+      <rect x="0" y="0" width="100" height="40" rx="8" fill="url(#chartGradient)" opacity="0.8"/>
+      <text x="50" y="15" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">Crecimiento</text>
+      <text x="50" y="30" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="14" font-weight="bold">+23%</text>
+    </g>
+    
+    <g transform="translate(390, 180)">
+      <rect x="0" y="0" width="100" height="40" rx="8" fill="url(#chartGradient)" opacity="0.8"/>
+      <text x="50" y="15" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">ROI</text>
+      <text x="50" y="30" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="14" font-weight="bold">4.2x</text>
+    </g>
+  </g>
+  
+  <!-- Floating data icons -->
+  <g transform="translate(30, 200)">
+    <circle cx="0" cy="0" r="12" fill="rgba(255,255,255,0.2)"/>
+    <text x="0" y="4" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="16">📊</text>
+  </g>
+  
+  <g transform="translate(570, 180)">
+    <circle cx="0" cy="0" r="12" fill="rgba(255,255,255,0.2)"/>
+    <text x="0" y="4" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="16">📈</text>
+  </g>
+  
+  <!-- Title -->
+  <text x="300" y="370" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="24" font-weight="bold">
+    Business Intelligence
+  </text>
+</svg>

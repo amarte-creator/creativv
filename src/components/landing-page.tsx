@@ -3,8 +3,10 @@
 import * as React from 'react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { MessageCircle, X, Send, ChevronRight, BarChart2, Globe, Zap, CheckCircle, ChevronDown, Menu, Moon, Sun } from 'lucide-react'
+import { MessageCircle, X, Send, ChevronRight, BarChart2, Globe, Zap, CheckCircle, ChevronDown, Brain, Code, TrendingUp, Users, Clock, Target, Award } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
+import { Header } from "@/components/header"
 import {
   Accordion,
   AccordionContent,
@@ -24,20 +26,50 @@ import { Switch } from "@/components/ui/switch"
 export function LandingPageComponent() {
   const [isChatOpen, setIsChatOpen] = React.useState(false)
   const [messages, setMessages] = React.useState([
-    { text: "¡Hola! Bienvenido a servicioscreativos.online. ¿En qué puedo ayudarte hoy, líder innovador?", isBot: true }
+    { text: "¡Hola! Soy tu asistente Creativv. ¿En qué puedo ayudarte a transformar tu negocio hoy?", isBot: true }
   ])
   const [inputMessage, setInputMessage] = React.useState("")
   const [darkMode, setDarkMode] = React.useState(false)
+  const [mounted, setMounted] = React.useState(false)
 
   React.useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add('dark')
-    } else {
-      document.documentElement.classList.remove('dark')
+    setMounted(true)
+    const savedMode = localStorage.getItem('darkMode')
+    if (savedMode !== null) {
+      setDarkMode(savedMode === 'true')
     }
-  }, [darkMode])
+  }, [])
+
+  React.useEffect(() => {
+    // Apply the dark mode class to document only after mounting
+    if (mounted) {
+      if (darkMode) {
+        document.documentElement.classList.add('dark')
+      } else {
+        document.documentElement.classList.remove('dark')
+      }
+    }
+  }, [darkMode, mounted])
+
+  const handleToggleDarkMode = () => {
+    const newMode = !darkMode
+    setDarkMode(newMode)
+    localStorage.setItem('darkMode', newMode.toString())
+  }
 
   const toggleChat = () => setIsChatOpen(!isChatOpen)
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId)
+    if (element) {
+      const headerHeight = 64 // Height of the fixed header (16 * 4 = 64px)
+      const elementPosition = element.offsetTop - headerHeight
+      window.scrollTo({
+        top: elementPosition,
+        behavior: 'smooth'
+      })
+    }
+  }
 
   const sendMessage = () => {
     if (inputMessage.trim() === "") return
@@ -45,197 +77,236 @@ export function LandingPageComponent() {
     setInputMessage("")
     // Simulate bot response
     setTimeout(() => {
-      setMessages(prev => [...prev, { text: "Entiendo que buscas soluciones personalizadas que te mantengan a la vanguardia. ¿Sobre qué área específica te gustaría saber más?", isBot: true }])
+      setMessages(prev => [...prev, { text: "Perfecto, entiendo tu interés en la transformación digital. ¿Te gustaría que te ayude a identificar qué servicio se adapta mejor a tus necesidades?", isBot: true }])
     }, 1000)
   }
 
   const services = [
     {
-      title: "Business Intelligence",
-      icon: <BarChart2 className="h-12 w-12 mb-4 text-primary" />,
-      description: "Transformamos datos en decisiones estratégicas para líderes visionarios",
+      title: "Automatizaciones con IA y n8n",
+      icon: <Brain className="h-12 w-12 mb-4 text-primary" />,
+      description: "Automatiza procesos complejos con inteligencia artificial y n8n",
       benefits: [
-        "Insights personalizados para tu industria",
-        "Dashboards interactivos a medida",
-        "Predicciones basadas en IA"
+        "Reducción del 80% en tareas repetitivas",
+        "Integración con más de 200 aplicaciones",
+        "Flujos de trabajo inteligentes con IA"
+      ],
+      slug: "automatizaciones"
+    },
+    {
+      title: "Desarrollo BI (Business Intelligence)",
+      icon: <BarChart2 className="h-12 w-12 mb-4 text-primary" />,
+      description: "Transforma datos en decisiones estratégicas con dashboards inteligentes",
+      benefits: [
+        "Dashboards interactivos personalizados",
+        "Análisis predictivo con IA",
+        "Reportes automatizados en tiempo real"
       ],
       slug: "business-intelligence"
     },
     {
-      title: "Desarrollo Web Innovador",
-      icon: <Globe className="h-12 w-12 mb-4 text-primary" />,
-      description: "Creamos plataformas web que revolucionan tu sector",
+      title: "Desarrollo Web",
+      icon: <Code className="h-12 w-12 mb-4 text-primary" />,
+      description: "Creamos sitios web modernos que convierten visitantes en clientes",
       benefits: [
         "Diseño UX/UI de vanguardia",
-        "Arquitectura escalable y flexible",
+        "Optimización para conversiones",
         "Integración con sistemas empresariales"
       ],
       slug: "desarrollo-web"
+    }
+  ]
+
+  const processSteps = [
+    {
+      step: "01",
+      title: "Diagnóstico",
+      description: "Analizamos tu negocio para identificar oportunidades de mejora",
+      icon: <Target className="h-8 w-8" />
     },
     {
-      title: "Transformación Digital Ágil",
-      icon: <Zap className="h-12 w-12 mb-4 text-primary" />,
-      description: "Aceleramos tu evolución digital con metodologías disruptivas",
-      benefits: [
-        "Roadmap de transformación personalizado",
-        "Implementación de culturas ágiles",
-        "Optimización de procesos con tecnología de punta"
-      ],
-      slug: "transformacion-digital"
+      step: "02", 
+      title: "Diseño de Solución",
+      description: "Creamos una estrategia personalizada para tu transformación digital",
+      icon: <TrendingUp className="h-8 w-8" />
+    },
+    {
+      step: "03",
+      title: "Implementación", 
+      description: "Desarrollamos e implementamos la solución con metodologías ágiles",
+      icon: <Code className="h-8 w-8" />
+    },
+    {
+      step: "04",
+      title: "Escalabilidad",
+      description: "Aseguramos que tu solución crezca con tu negocio",
+      icon: <Award className="h-8 w-8" />
+    }
+  ]
+
+  const testimonials = [
+    {
+      name: "María González",
+      role: "CEO, TechStart",
+      content: "Creativv transformó completamente nuestros procesos. Ahora somos 3x más eficientes.",
+      avatar: "MG"
+    },
+    {
+      name: "Carlos Rodríguez", 
+      role: "Director de Operaciones, DataCorp",
+      content: "Los dashboards de BI que desarrollaron nos han dado insights que nunca habíamos visto.",
+      avatar: "CR"
+    },
+    {
+      name: "Ana Martínez",
+      role: "Fundadora, InnovateLab",
+      content: "Su enfoque en automatización nos permitió escalar sin contratar más personal.",
+      avatar: "AM"
     }
   ]
 
   const handleCTA = () => {
     setIsChatOpen(true)
     setMessages([
-      { text: "¡Excelente decisión! Como líder que busca la excelencia, has dado el primer paso hacia la transformación de tu negocio. ¿Qué desafío específico estás enfrentando en tu industria?", isBot: true }
+      { text: "¡Excelente decisión! Estás a un paso de transformar tu negocio. ¿Qué desafío específico te gustaría resolver primero?", isBot: true }
     ])
   }
 
   return (
-    <div className={`min-h-screen flex flex-col ${darkMode ? 'dark' : ''}`}>
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-14 items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
-              {/* Replace with actual Allok logo */}
-              <span className="text-primary-foreground font-bold">A</span>
-            </div>
-            <nav className="hidden md:flex space-x-4">
-              <Sheet>
-                <SheetTrigger asChild>
-                  <Button variant="ghost">Servicios</Button>
-                </SheetTrigger>
-                <SheetContent side="left" className="w-[400px] sm:w-[540px]">
-                  <SheetHeader>
-                    <SheetTitle>Nuestros Servicios</SheetTitle>
-                    <SheetDescription>
-                      Descubre cómo podemos impulsar tu negocio con nuestras soluciones innovadoras.
-                    </SheetDescription>
-                  </SheetHeader>
-                  <div className="grid gap-4 py-4">
-                    {services.map((service) => (
-                      <div key={service.title} className="space-y-2">
-                        <h3 className="text-lg font-semibold flex items-center">
-                          {service.icon}
-                          <span className="ml-2">{service.title}</span>
-                        </h3>
-                        <p className="text-sm text-muted-foreground">{service.description}</p>
-                        <ul className="text-sm space-y-1">
-                          {service.benefits.map((benefit, index) => (
-                            <li key={index} className="flex items-center">
-                              <CheckCircle className="h-4 w-4 mr-2 text-primary" />
-                              <span>{benefit}</span>
-                            </li>
-                          ))}
-                        </ul>
-                        <Button asChild className="mt-2">
-                          <Link href={`/servicios/${service.slug}`}>Saber más</Link>
-                        </Button>
-                      </div>
-                    ))}
-                  </div>
-                </SheetContent>
-              </Sheet>
-              <Button variant="ghost" asChild>
-                <Link href="#contacto">Contacto</Link>
-              </Button>
-            </nav>
-          </div>
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-2">
-              <Switch
-                id="dark-mode"
-                checked={darkMode}
-                onCheckedChange={setDarkMode}
-              />
-              <label htmlFor="dark-mode" className="sr-only">
-                Modo oscuro
-              </label>
-              {darkMode ? (
-                <Moon className="h-4 w-4" />
-              ) : (
-                <Sun className="h-4 w-4" />
-              )}
-            </div>
-            <Sheet>
-              <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="md:hidden">
-                  <Menu className="h-6 w-6" />
-                  <span className="sr-only">Abrir menú</span>
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="left" className="w-[250px] sm:w-[300px]">
-                <nav className="flex flex-col space-y-4">
-                  <Button variant="ghost" asChild>
-                    <Link href="/">Inicio</Link>
-                  </Button>
-                  <Accordion type="single" collapsible>
-                    <AccordionItem value="services">
-                      <AccordionTrigger>Servicios</AccordionTrigger>
-                      <AccordionContent>
-                        <div className="flex flex-col space-y-2">
-                          {services.map((service) => (
-                            <Button key={service.title} variant="ghost" asChild className="justify-start">
-                              <Link href={`/servicios/${service.slug}`}>{service.title}</Link>
-                            </Button>
-                          ))}
-                        </div>
-                      </AccordionContent>
-                    </AccordionItem>
-                  </Accordion>
-                  <Button variant="ghost" asChild>
-                    <Link href="#contacto">Contacto</Link>
-                  </Button>
-                </nav>
-              </SheetContent>
-            </Sheet>
-          </div>
-        </div>
-      </header>
+    <div className={`min-h-screen flex flex-col w-full ${mounted && darkMode ? 'dark' : ''}`}>
+      <Header 
+        darkMode={darkMode} 
+        onToggleDarkMode={handleToggleDarkMode} 
+        scrollToSection={scrollToSection}
+      />
 
-      <main className="flex-grow">
-        <section className="py-20">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center space-y-4 text-center">
-              <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none animate-fade-up">
-                Soluciones Creativas para Líderes Visionarios
+      <main className="flex-grow w-full">
+        {/* Hero Section */}
+        <section id="inicio" className="py-24 relative overflow-hidden w-full">
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-secondary/5 to-transparent"></div>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="flex flex-col items-center space-y-8 text-center">
+              <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl animate-fade-up">
+                Transformamos ideas en{" "}
+                <span className="gradient-text">impacto digital</span>
               </h1>
-              <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl animate-fade-up animate-delay-150">
-                Transformamos tu visión en realidad con estrategias personalizadas y tecnología de vanguardia
+              <p className="mx-auto max-w-[800px] text-muted-foreground text-lg md:text-xl animate-fade-up animate-delay-150">
+                Somos expertos en transformación digital que ayudamos a empresas a escalar con tecnología de vanguardia. 
+                Desde automatizaciones con IA hasta desarrollo web, convertimos tus desafíos en oportunidades.
               </p>
-              <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 animate-fade-up animate-delay-300" onClick={handleCTA}>
-                Lidera el Cambio Ahora <ChevronRight className="ml-2 h-4 w-4" />
-              </Button>
+              <div className="flex flex-col sm:flex-row gap-4 animate-fade-up animate-delay-300">
+                <Button size="lg" className="btn-primary text-lg px-8 py-6" onClick={handleCTA}>
+                  Agenda una consulta gratuita <ChevronRight className="ml-2 h-5 w-5" />
+                </Button>
+                <Button size="lg" variant="outline" className="text-lg px-8 py-6">
+                  Ver nuestros casos
+                </Button>
+              </div>
             </div>
           </div>
         </section>
 
-        <section className="py-20">
-          <div className="container px-4 md:px-6">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-center mb-12 animate-fade-up">
-              Servicios para Líderes que Marcan la Diferencia
-            </h2>
+        {/* Sobre Nosotros */}
+        <section className="py-20 w-full">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <div className="space-y-6">
+                <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl animate-fade-up">
+                  Sobre Creativv
+                </h2>
+                <p className="text-lg text-muted-foreground animate-fade-up animate-delay-150">
+                  En Creativv, creemos que la tecnología debe ser un catalizador para el crecimiento empresarial. 
+                  Nuestra filosofía se basa en tres pilares fundamentales:
+                </p>
+                <div className="space-y-4 animate-fade-up animate-delay-300">
+                  <div className="flex items-start space-x-3">
+                    <div className="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                      <TrendingUp className="h-4 w-4 text-primary" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold">Innovación</h3>
+                      <p className="text-muted-foreground">Utilizamos las últimas tecnologías para crear soluciones disruptivas</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start space-x-3">
+                    <div className="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                      <Target className="h-4 w-4 text-primary" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold">Claridad</h3>
+                      <p className="text-muted-foreground">Comunicamos de forma transparente y medimos resultados concretos</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start space-x-3">
+                    <div className="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                      <Award className="h-4 w-4 text-primary" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold">Impacto</h3>
+                      <p className="text-muted-foreground">Nos enfocamos en generar valor real y medible para tu negocio</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="relative">
+                <div className="glass rounded-2xl p-8 animate-fade-up animate-delay-300">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <div className="text-2xl font-bold text-primary">50+</div>
+                      <div className="text-sm text-muted-foreground">Proyectos completados</div>
+                    </div>
+                    <div className="space-y-2">
+                      <div className="text-2xl font-bold text-primary">95%</div>
+                      <div className="text-sm text-muted-foreground">Satisfacción del cliente</div>
+                    </div>
+                    <div className="space-y-2">
+                      <div className="text-2xl font-bold text-primary">3x</div>
+                      <div className="text-sm text-muted-foreground">Mejora en eficiencia</div>
+                    </div>
+                    <div className="space-y-2">
+                      <div className="text-2xl font-bold text-primary">24/7</div>
+                      <div className="text-sm text-muted-foreground">Soporte disponible</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Servicios */}
+        <section id="servicios" className="py-20 bg-muted/30 w-full">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl mb-6 animate-fade-up">
+                Nuestros Servicios
+              </h2>
+              <p className="mx-auto max-w-[600px] text-lg text-muted-foreground animate-fade-up animate-delay-150">
+                Soluciones integrales de transformación digital diseñadas para impulsar tu negocio al siguiente nivel
+              </p>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {services.map((service, index) => (
-                <div key={service.title} className="bg-card text-card-foreground rounded-lg shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 animate-fade-up" style={{animationDelay: `${index * 150}ms`}}>
-                  <div className="p-6">
+                <div key={service.title} className="glass rounded-xl p-8 transition-all duration-300 hover:shadow-xl hover:-translate-y-2 animate-fade-up" style={{animationDelay: `${index * 150}ms`}}>
+                  <div className="text-center">
                     {service.icon}
                     <h3 className="text-xl font-semibold mb-4">{service.title}</h3>
-                    <p className="text-muted-foreground mb-4">
+                    <p className="text-muted-foreground mb-6">
                       {service.description}
                     </p>
-                    <ul className="space-y-2">
+                    <ul className="space-y-3 text-left">
                       {service.benefits.map((benefit, index) => (
                         <li key={index} className="flex items-center">
-                          <CheckCircle className="h-5 w-5 mr-2 text-primary" />
-                          <span>{benefit}</span>
+                          <CheckCircle className="h-5 w-5 mr-3 text-primary flex-shrink-0" />
+                          <span className="text-sm">{benefit}</span>
                         </li>
                       ))}
                     </ul>
-                    <Link href={`/servicios/${service.slug}`} passHref>
-                      <Button className="mt-6 w-full">Descubre Más</Button>
-                    </Link>
+                    <Button className="mt-8 w-full btn-primary" asChild>
+                      <Link href={`/servicios/${service.slug}`}>
+                        Saber más
+                      </Link>
+                    </Button>
                   </div>
                 </div>
               ))}
@@ -243,63 +314,103 @@ export function LandingPageComponent() {
           </div>
         </section>
 
-        <section id="contacto" className="py-20 bg-muted/50">
-          <div className="container px-4 md:px-6 text-center">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-4 animate-fade-up">
-              ¿Listo para Liderar la Innovación?
-            </h2>
-            <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl mb-8 animate-fade-up animate-delay-150">
-              No te conformes con soluciones genéricas. Descubre cómo podemos impulsar tu visión única.
-            </p>
-            <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 animate-fade-up animate-delay-300" onClick={handleCTA}>
-              Inicia tu Revolución Digital
-            </Button>
+        {/* Proceso de Trabajo */}
+        <section className="py-20 w-full">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl mb-6 animate-fade-up">
+                Nuestro Proceso
+              </h2>
+              <p className="mx-auto max-w-[600px] text-lg text-muted-foreground animate-fade-up animate-delay-150">
+                Una metodología probada que garantiza resultados excepcionales en cada proyecto
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {processSteps.map((step, index) => (
+                <div key={step.step} className="text-center animate-fade-up" style={{animationDelay: `${index * 200}ms`}}>
+                  <div className="relative mb-6">
+                    <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <span className="text-2xl font-bold text-primary">{step.step}</span>
+                    </div>
+                    <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto">
+                      {step.icon}
+                    </div>
+                  </div>
+                  <h3 className="text-xl font-semibold mb-3">{step.title}</h3>
+                  <p className="text-muted-foreground">{step.description}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
-        <section className="py-20">
-          <div className="container px-4 md:px-6">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-center mb-12 animate-fade-up">
-              Preguntas Frecuentes
+        {/* Casos de Éxito */}
+        <section id="casos" className="py-20 bg-muted/30 w-full">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl mb-6 animate-fade-up">
+                Casos de Éxito
+              </h2>
+              <p className="mx-auto max-w-[600px] text-lg text-muted-foreground animate-fade-up animate-delay-150">
+                Descubre cómo hemos transformado negocios con nuestras soluciones digitales
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {testimonials.map((testimonial, index) => (
+                <div key={testimonial.name} className="glass rounded-xl p-8 animate-fade-up" style={{animationDelay: `${index * 200}ms`}}>
+                  <div className="flex items-center mb-6">
+                    <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mr-4">
+                      <span className="font-semibold text-primary">{testimonial.avatar}</span>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold">{testimonial.name}</h4>
+                      <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                    </div>
+                  </div>
+                  <p className="text-muted-foreground italic">"{testimonial.content}"</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Final */}
+        <section id="contacto" className="py-20 w-full">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl mb-6 animate-fade-up">
+              ¿Listo para transformar tu negocio?
             </h2>
-            <Accordion type="single" collapsible className="w-full max-w-3xl mx-auto">
-              <AccordionItem value="item-1">
-                <AccordionTrigger>¿Cómo se adaptan sus servicios a mi industria específica?</AccordionTrigger>
-                <AccordionContent>
-                  Nuestro enfoque se basa en un análisis profundo de tu sector y tus necesidades únicas. Desarrollamos soluciones personalizadas que se alinean con los desafíos específicos de tu industria, garantizando resultados relevantes y efectivos.
-                </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="item-2">
-                <AccordionTrigger>¿Cuánto tiempo toma ver resultados con sus servicios?</AccordionTrigger>
-                <AccordionContent>
-                  El tiempo para ver resultados varía según el proyecto y su complejidad. Sin embargo, nuestro enfoque ágil permite que veas avances y mejoras incrementales desde las primeras semanas de implementación. Trabajamos en ciclos cortos para asegurar una entrega de valor constante.
-                </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="item-3">
-                <AccordionTrigger>¿Cómo aseguran la confidencialidad de la información de mi empresa?</AccordionTrigger>
-                <AccordionContent>
-                  La seguridad y confidencialidad son primordiales para nosotros. Implementamos protocolos de seguridad de nivel empresarial, incluyendo encriptación de datos, accesos restringidos y acuerdos de confidencialidad robustos. Además, nuestro equipo está capacitado en las mejores prácticas de manejo de información sensible.
-                </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="item-4">
-                <AccordionTrigger>¿Ofrecen soporte continuo después de la implementación?</AccordionTrigger>
-                <AccordionContent>
-                  Absolutamente. Nuestro compromiso no termina con la implementación. Ofrecemos planes de soporte y mantenimiento continuo, asegurando que tus soluciones evolucionen con tu negocio. Además, proporcionamos capacitación a tu equipo para maximizar el valor de las herramientas implementadas.
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
+            <p className="mx-auto max-w-[600px] text-lg text-muted-foreground mb-8 animate-fade-up animate-delay-150">
+              Únete a las empresas que ya están escalando con tecnología de vanguardia. 
+              Tu transformación digital comienza aquí.
+            </p>
+            <Button size="lg" className="btn-primary text-lg px-8 py-6 animate-fade-up animate-delay-300" onClick={handleCTA}>
+              Agenda una demo <ChevronRight className="ml-2 h-5 w-5" />
+            </Button>
           </div>
         </section>
       </main>
 
-      <footer className="border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex flex-col items-center justify-between gap-4 py-10 md:h-24 md:flex-row md:py-0">
-          <div className="text-center text-sm leading-loose text-muted-foreground md:text-left">
-            © 2024 servicioscreativos.online. Todos los derechos reservados.
+      {/* Footer */}
+      <footer className="border-t border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 w-full">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-between gap-4 py-10 md:h-24 md:flex-row md:py-0">
+          <div className="flex items-center space-x-2">
+            <Image 
+              src="/creativv-lg.png" 
+              alt="Creativv" 
+              width={32} 
+              height={32}
+              className="rounded-lg"
+            />
+            <span className="text-lg font-bold gradient-text">Creativv</span>
           </div>
-          <div className="flex gap-4">
+          <div className="text-center text-sm leading-loose text-muted-foreground md:text-left">
+            © 2024 Creativv. Todos los derechos reservados.
+          </div>
+          <div className="flex gap-6">
             <a href="#" className="text-sm font-medium hover:underline underline-offset-4">Términos</a>
             <a href="#" className="text-sm font-medium hover:underline underline-offset-4">Privacidad</a>
+            <a href="#" className="text-sm font-medium hover:underline underline-offset-4">contacto</a>
           </div>
         </div>
       </footer>
@@ -307,9 +418,9 @@ export function LandingPageComponent() {
       {/* Chatbot */}
       <div className={`fixed bottom-4 right-4 z-50 ${isChatOpen ? 'w-80' : 'w-auto'} transition-all duration-300`}>
         {isChatOpen ? (
-          <div className="bg-background rounded-lg shadow-lg overflow-hidden animate-fade-up">
+          <div className="glass rounded-xl shadow-2xl overflow-hidden animate-fade-up">
             <div className="bg-primary text-primary-foreground p-4 flex justify-between items-center">
-              <h3 className="font-semibold">Asistente de Innovación</h3>
+              <h3 className="font-semibold">Asistente Creativv</h3>
               <Button variant="ghost" size="icon" onClick={toggleChat}>
                 <X className="h-5 w-5" />
               </Button>
@@ -317,42 +428,33 @@ export function LandingPageComponent() {
             <div className="h-80 overflow-y-auto p-4 space-y-4">
               {messages.map((msg, index) => (
                 <div key={index} className={`flex ${msg.isBot ? 'justify-start' : 'justify-end'}`}>
-                  <div className={`rounded-lg p-2 max-w-[80%] ${msg.isBot ? 'bg-muted' : 'bg-primary text-primary-foreground'} animate-fade-in`}>
+                  <div className={`rounded-lg p-3 max-w-[80%] ${msg.isBot ? 'bg-muted' : 'bg-primary text-primary-foreground'} animate-fade-in`}>
                     {msg.text}
                   </div>
                 </div>
               ))}
             </div>
-            <div className="p-4 border-t">
+            <div className="p-4 border-t border-border/40">
               <div className="flex space-x-2">
                 <Input
                   value={inputMessage}
                   onChange={(e) => setInputMessage(e.target.value)}
                   placeholder="Escribe tu mensaje..."
                   onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
+                  className="flex-1"
                 />
-                <Button onClick={sendMessage}>
-                  <Send className="h-5 w-5" />
+                <Button onClick={sendMessage} size="icon">
+                  <Send className="h-4 w-4" />
                 </Button>
               </div>
             </div>
           </div>
         ) : (
-          <Button onClick={toggleChat} size="icon" className="rounded-full w-12 h-12 animate-bounce">
+          <Button onClick={toggleChat} size="icon" className="rounded-full w-14 h-14 btn-primary animate-bounce">
             <MessageCircle className="h-6 w-6" />
           </Button>
         )}
       </div>
-
-      {/* Scroll down button */}
-      <Button
-        className="fixed bottom-4 left-4 rounded-full animate-bounce"
-        size="icon"
-        variant="outline"
-        onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
-      >
-        <ChevronDown className="h-4 w-4" />
-      </Button>
     </div>
   )
 }

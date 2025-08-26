@@ -1,0 +1,131 @@
+<svg width="600" height="400" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff9a9e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fecfef;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="serviceGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="600" height="400" fill="url(#bgGradient)"/>
+  
+  <!-- Abstract geometric shapes -->
+  <circle cx="80" cy="80" r="30" fill="rgba(255,255,255,0.1)" opacity="0.6"/>
+  <circle cx="520" cy="100" r="25" fill="rgba(255,255,255,0.1)" opacity="0.4"/>
+  <circle cx="100" cy="320" r="20" fill="rgba(255,255,255,0.1)" opacity="0.5"/>
+  
+  <!-- Microservices Architecture -->
+  <g transform="translate(50, 80)">
+    <!-- User Service -->
+    <rect x="0" y="0" width="100" height="60" rx="10" fill="url(#serviceGradient)" filter="url(#glow)"/>
+    <text x="50" y="25" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">User Service</text>
+    <text x="50" y="40" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10">Port: 3001</text>
+    <text x="50" y="50" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="8">Node.js</text>
+  </g>
+  
+  <!-- Product Service -->
+  <rect x="170" y="80" width="100" height="60" rx="10" fill="url(#serviceGradient)" filter="url(#glow)"/>
+  <text x="220" y="105" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Product Service</text>
+  <text x="220" y="120" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10">Port: 3002</text>
+  <text x="220" y="130" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="8">Python</text>
+  
+  <!-- Order Service -->
+  <rect x="340" y="80" width="100" height="60" rx="10" fill="url(#serviceGradient)" filter="url(#glow)"/>
+  <text x="390" y="105" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Order Service</text>
+  <text x="390" y="120" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10">Port: 3003</text>
+  <text x="390" y="130" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="8">Java</text>
+  
+  <!-- Payment Service -->
+  <rect x="510" y="80" width="100" height="60" rx="10" fill="url(#serviceGradient)" filter="url(#glow)"/>
+  <text x="560" y="105" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Payment Service</text>
+  <text x="560" y="120" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10">Port: 3004</text>
+  <text x="560" y="130" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="8">Go</text>
+  
+  <!-- API Gateway -->
+  <g transform="translate(220, 180)">
+    <rect x="0" y="0" width="160" height="80" rx="15" fill="rgba(255,255,255,0.9)" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+    <text x="80" y="25" text-anchor="middle" fill="#333" font-family="Arial, sans-serif" font-size="16" font-weight="bold">API Gateway</text>
+    <text x="80" y="45" text-anchor="middle" fill="#666" font-family="Arial, sans-serif" font-size="12">Load Balancer</text>
+    <text x="80" y="60" text-anchor="middle" fill="#666" font-family="Arial, sans-serif" font-size="12">Authentication</text>
+    <text x="80" y="75" text-anchor="middle" fill="#666" font-family="Arial, sans-serif" font-size="12">Rate Limiting</text>
+  </g>
+  
+  <!-- Database Services -->
+  <g transform="translate(50, 300)">
+    <!-- User DB -->
+    <rect x="0" y="0" width="80" height="50" rx="8" fill="rgba(255,255,255,0.2)"/>
+    <text x="40" y="20" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">User DB</text>
+    <text x="40" y="35" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="8">PostgreSQL</text>
+  </g>
+  
+  <g transform="translate(150, 300)">
+    <!-- Product DB -->
+    <rect x="0" y="0" width="80" height="50" rx="8" fill="rgba(255,255,255,0.2)"/>
+    <text x="40" y="20" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">Product DB</text>
+    <text x="40" y="35" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="8">MongoDB</text>
+  </g>
+  
+  <g transform="translate(250, 300)">
+    <!-- Order DB -->
+    <rect x="0" y="0" width="80" height="50" rx="8" fill="rgba(255,255,255,0.2)"/>
+    <text x="40" y="20" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">Order DB</text>
+    <text x="40" y="35" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="8">MySQL</text>
+  </g>
+  
+  <g transform="translate(350, 300)">
+    <!-- Payment DB -->
+    <rect x="0" y="0" width="80" height="50" rx="8" fill="rgba(255,255,255,0.2)"/>
+    <text x="40" y="20" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">Payment DB</text>
+    <text x="40" y="35" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="8">Redis</text>
+  </g>
+  
+  <!-- Message Queue -->
+  <g transform="translate(470, 300)">
+    <rect x="0" y="0" width="80" height="50" rx="8" fill="rgba(255,255,255,0.2)"/>
+    <text x="40" y="20" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">Message Queue</text>
+    <text x="40" y="35" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="8">RabbitMQ</text>
+  </g>
+  
+  <!-- Connection lines -->
+  <g stroke="white" stroke-width="2" fill="none" opacity="0.6">
+    <!-- Services to Gateway -->
+    <path d="M 100 110 L 220 180"/>
+    <path d="M 270 110 L 300 180"/>
+    <path d="M 440 110 L 380 180"/>
+    <path d="M 560 110 L 380 180"/>
+    
+    <!-- Gateway to Databases -->
+    <path d="M 220 260 L 90 300"/>
+    <path d="M 300 260 L 190 300"/>
+    <path d="M 300 260 L 290 300"/>
+    <path d="M 300 260 L 390 300"/>
+    <path d="M 300 260 L 510 300"/>
+  </g>
+  
+  <!-- Floating icons -->
+  <g transform="translate(30, 200)">
+    <circle cx="0" cy="0" r="12" fill="rgba(255,255,255,0.2)"/>
+    <text x="0" y="4" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="16">🔧</text>
+  </g>
+  
+  <g transform="translate(570, 220)">
+    <circle cx="0" cy="0" r="12" fill="rgba(255,255,255,0.2)"/>
+    <text x="0" y="4" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="16">⚡</text>
+  </g>
+  
+  <!-- Title -->
+  <text x="300" y="380" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="24" font-weight="bold">
+    Microservicios
+  </text>
+</svg>

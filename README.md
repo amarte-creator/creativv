@@ -1,36 +1,116 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Creativv - Transformamos ideas en impacto digital
 
-## Getting Started
+Sitio web oficial de Creativv, expertos en transformación digital. Desarrollado con Next.js, TypeScript y Tailwind CSS.
 
-First, run the development server:
+## 🚀 Características
 
+- **Diseño Moderno**: Interfaz elegante con la paleta de colores de Creativv
+- **Responsive**: Optimizado para todos los dispositivos
+- **Performance**: Carga rápida y optimizada
+- **SEO**: Metadatos optimizados para motores de búsqueda
+- **Accesibilidad**: Cumple con estándares de accesibilidad web
+
+## 🎨 Brand Guidelines
+
+### Colores
+- **Fondo principal**: Deep Charcoal #1A1A1A
+- **Color de acción**: Electric Blue #2979FF
+- **Acentos secundarios**: Vibrant Purple #9C27B0
+- **Texto principal**: Off White #F5F5F7
+- **Texto secundario**: Gris claro #B0B0B5
+
+### Tipografía
+- **Títulos**: Poppins Bold (36px – 48px)
+- **Subtítulos**: Poppins Medium (24px – 28px)
+- **Texto**: Inter Regular (16px – 18px)
+- **Botones**: Poppins SemiBold, mayúsculas
+
+## 🛠️ Tecnologías
+
+- **Framework**: Next.js 14
+- **Lenguaje**: TypeScript
+- **Styling**: Tailwind CSS
+- **Componentes**: Radix UI
+- **Iconos**: Lucide React
+- **Animaciones**: CSS Animations
+
+## 📦 Instalación
+
+1. Clona el repositorio:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone [url-del-repositorio]
+cd creativsvs
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Instala las dependencias:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Ejecuta el servidor de desarrollo:
+```bash
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Abre [http://localhost:3000](http://localhost:3000) en tu navegador.
 
-## Learn More
+## 📁 Estructura del Proyecto
 
-To learn more about Next.js, take a look at the following resources:
+```
+creativsvs/
+├── src/
+│   ├── app/
+│   │   ├── layout.tsx          # Layout principal
+│   │   ├── page.tsx            # Página principal
+│   │   └── globals.css         # Estilos globales
+│   ├── components/
+│   │   ├── landing-page.tsx    # Componente principal
+│   │   └── ui/                 # Componentes UI
+│   └── lib/
+│       └── utils.ts            # Utilidades
+├── public/
+│   ├── creativv-lg.png         # Logo principal
+│   └── favicon.svg             # Favicon
+└── package.json
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🎯 Secciones del Sitio
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. **Hero Section**: Presentación principal con CTA
+2. **Sobre Nosotros**: Filosofía y valores de Creativv
+3. **Servicios**: Automatizaciones, BI y Desarrollo Web
+4. **Proceso**: Metodología de trabajo
+5. **Casos de Éxito**: Testimonios de clientes
+6. **CTA Final**: Llamada a la acción
 
-## Deploy on Vercel
+## 🚀 Scripts Disponibles
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `npm run dev` - Servidor de desarrollo
+- `npm run build` - Construcción para producción
+- `npm run start` - Servidor de producción
+- `npm run lint` - Linting del código
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📱 Responsive Design
+
+El sitio está optimizado para:
+- **Desktop**: 1024px+
+- **Tablet**: 768px - 1023px
+- **Mobile**: 320px - 767px
+
+## 🎨 Componentes Personalizados
+
+- **Glassmorphism**: Efectos de cristal para cards
+- **Gradient Text**: Texto con gradiente de marca
+- **Animaciones**: Fade-in, slide-up, y más
+- **Botones**: Estilos personalizados con hover effects
+
+## 📞 Contacto
+
+Para más información sobre Creativv:
+- **Email**: [email@creativv.com]
+- **Website**: [creativv.com]
+- **LinkedIn**: [linkedin.com/company/creativv]
+
+---
+
+© 2024 Creativv. Todos los derechos reservados.

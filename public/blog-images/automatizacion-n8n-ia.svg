@@ -1,0 +1,85 @@
+<svg width="600" height="400" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="iconGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4facfe;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00f2fe;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="600" height="400" fill="url(#bgGradient)"/>
+  
+  <!-- Abstract geometric shapes -->
+  <circle cx="100" cy="100" r="40" fill="rgba(255,255,255,0.1)" opacity="0.6"/>
+  <circle cx="500" cy="80" r="30" fill="rgba(255,255,255,0.1)" opacity="0.4"/>
+  <circle cx="80" cy="320" r="25" fill="rgba(255,255,255,0.1)" opacity="0.5"/>
+  
+  <!-- Main automation flow diagram -->
+  <g transform="translate(150, 120)">
+    <!-- Input node -->
+    <rect x="0" y="0" width="80" height="60" rx="10" fill="url(#iconGradient)" filter="url(#glow)"/>
+    <text x="40" y="35" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">INPUT</text>
+    
+    <!-- Arrow -->
+    <path d="M 90 30 L 130 30" stroke="white" stroke-width="3" marker-end="url(#arrowhead)"/>
+    
+    <!-- Process node -->
+    <rect x="140" y="0" width="80" height="60" rx="10" fill="url(#iconGradient)" filter="url(#glow)"/>
+    <text x="180" y="35" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">n8n</text>
+    
+    <!-- Arrow -->
+    <path d="M 230 30 L 270 30" stroke="white" stroke-width="3" marker-end="url(#arrowhead)"/>
+    
+    <!-- AI node -->
+    <rect x="280" y="0" width="80" height="60" rx="10" fill="url(#iconGradient)" filter="url(#glow)"/>
+    <text x="320" y="35" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">IA</text>
+    
+    <!-- Arrow -->
+    <path d="M 370 30 L 410 30" stroke="white" stroke-width="3" marker-end="url(#arrowhead)"/>
+    
+    <!-- Output node -->
+    <rect x="420" y="0" width="80" height="60" rx="10" fill="url(#iconGradient)" filter="url(#glow)"/>
+    <text x="460" y="35" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">OUTPUT</text>
+  </g>
+  
+  <!-- Connection lines -->
+  <g stroke="rgba(255,255,255,0.3)" stroke-width="2" fill="none">
+    <path d="M 200 200 Q 300 150 400 200"/>
+    <path d="M 150 250 Q 250 200 350 250"/>
+    <path d="M 100 300 Q 200 250 300 300"/>
+  </g>
+  
+  <!-- Floating icons -->
+  <g transform="translate(50, 200)">
+    <circle cx="0" cy="0" r="15" fill="rgba(255,255,255,0.2)"/>
+    <text x="0" y="5" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="20">⚡</text>
+  </g>
+  
+  <g transform="translate(550, 250)">
+    <circle cx="0" cy="0" r="15" fill="rgba(255,255,255,0.2)"/>
+    <text x="0" y="5" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="20">🤖</text>
+  </g>
+  
+  <!-- Title -->
+  <text x="300" y="350" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="24" font-weight="bold">
+    Automatización con n8n + IA
+  </text>
+  
+  <!-- Arrow marker definition -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="white"/>
+    </marker>
+  </defs>
+</svg>
