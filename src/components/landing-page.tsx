@@ -3,7 +3,7 @@
 import * as React from 'react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { MessageCircle, X, Send, ChevronRight, BarChart2, Globe, Zap, CheckCircle, ChevronDown, Brain, Code, TrendingUp, Users, Clock, Target, Award } from 'lucide-react'
+import { MessageCircle, X, Send, ChevronRight, BarChart2, Globe, Zap, CheckCircle, ChevronDown, Brain, Code, TrendingUp, Users, Clock, Target, Award, Search, Lightbulb, Rocket, Shield, ArrowRight, Sparkles, Star, Zap as ZapIcon, BarChart3, Settings, Monitor, Database, Cpu, Workflow, PieChart, LineChart, Activity } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Header } from "@/components/header"
@@ -31,6 +31,7 @@ export function LandingPageComponent() {
   const [inputMessage, setInputMessage] = React.useState("")
   const [darkMode, setDarkMode] = React.useState(false)
   const [mounted, setMounted] = React.useState(false)
+  const [isLoading, setIsLoading] = React.useState(false)
 
   React.useEffect(() => {
     setMounted(true)
@@ -71,14 +72,53 @@ export function LandingPageComponent() {
     }
   }
 
-  const sendMessage = () => {
-    if (inputMessage.trim() === "") return
-    setMessages([...messages, { text: inputMessage, isBot: false }])
+  const sendMessage = async () => {
+    if (inputMessage.trim() === "" || isLoading) return
+    
+    const userMessage = inputMessage
     setInputMessage("")
-    // Simulate bot response
-    setTimeout(() => {
-      setMessages(prev => [...prev, { text: "Perfecto, entiendo tu interés en la transformación digital. ¿Te gustaría que te ayude a identificar qué servicio se adapta mejor a tus necesidades?", isBot: true }])
-    }, 1000)
+    setIsLoading(true)
+    
+    // Add user message to chat
+    setMessages(prev => [...prev, { text: userMessage, isBot: false }])
+    
+    try {
+      // Prepare messages for API (excluding the initial greeting)
+      const apiMessages = messages
+        .filter(msg => !msg.isBot || msg.text !== "¡Hola! Soy tu asistente Creativv. ¿En qué puedo ayudarte a transformar tu negocio hoy?")
+        .map(msg => ({
+          role: msg.isBot ? 'assistant' : 'user',
+          content: msg.text
+        }))
+      
+      // Add current user message
+      apiMessages.push({ role: 'user', content: userMessage })
+      
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ messages: apiMessages }),
+      })
+      
+      if (!response.ok) {
+        throw new Error('Failed to get response')
+      }
+      
+      const data = await response.json()
+      
+      // Add bot response to chat
+      setMessages(prev => [...prev, { text: data.response, isBot: true }])
+    } catch (error) {
+      console.error('Chat error:', error)
+      setMessages(prev => [...prev, { 
+        text: "Lo siento, tuve un problema procesando tu mensaje. ¿Podrías intentarlo de nuevo o contactarnos directamente?", 
+        isBot: true 
+      }])
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   const services = [
@@ -117,59 +157,10 @@ export function LandingPageComponent() {
     }
   ]
 
-  const processSteps = [
-    {
-      step: "01",
-      title: "Diagnóstico",
-      description: "Analizamos tu negocio para identificar oportunidades de mejora",
-      icon: <Target className="h-8 w-8" />
-    },
-    {
-      step: "02", 
-      title: "Diseño de Solución",
-      description: "Creamos una estrategia personalizada para tu transformación digital",
-      icon: <TrendingUp className="h-8 w-8" />
-    },
-    {
-      step: "03",
-      title: "Implementación", 
-      description: "Desarrollamos e implementamos la solución con metodologías ágiles",
-      icon: <Code className="h-8 w-8" />
-    },
-    {
-      step: "04",
-      title: "Escalabilidad",
-      description: "Aseguramos que tu solución crezca con tu negocio",
-      icon: <Award className="h-8 w-8" />
-    }
-  ]
 
-  const testimonials = [
-    {
-      name: "María González",
-      role: "CEO, TechStart",
-      content: "Creativv transformó completamente nuestros procesos. Ahora somos 3x más eficientes.",
-      avatar: "MG"
-    },
-    {
-      name: "Carlos Rodríguez", 
-      role: "Director de Operaciones, DataCorp",
-      content: "Los dashboards de BI que desarrollaron nos han dado insights que nunca habíamos visto.",
-      avatar: "CR"
-    },
-    {
-      name: "Ana Martínez",
-      role: "Fundadora, InnovateLab",
-      content: "Su enfoque en automatización nos permitió escalar sin contratar más personal.",
-      avatar: "AM"
-    }
-  ]
 
   const handleCTA = () => {
-    setIsChatOpen(true)
-    setMessages([
-      { text: "¡Excelente decisión! Estás a un paso de transformar tu negocio. ¿Qué desafío específico te gustaría resolver primero?", isBot: true }
-    ])
+    window.open(process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://calendly.com/avilamolinaadrian/30min', '_blank')
   }
 
   return (
@@ -197,9 +188,6 @@ export function LandingPageComponent() {
               <div className="flex flex-col sm:flex-row gap-4 animate-fade-up animate-delay-300">
                 <Button size="lg" className="btn-primary text-lg px-8 py-6" onClick={handleCTA}>
                   Agenda una consulta gratuita <ChevronRight className="ml-2 h-5 w-5" />
-                </Button>
-                <Button size="lg" variant="outline" className="text-lg px-8 py-6">
-                  Ver nuestros casos
                 </Button>
               </div>
             </div>
@@ -314,65 +302,240 @@ export function LandingPageComponent() {
           </div>
         </section>
 
-        {/* Proceso de Trabajo */}
-        <section className="py-20 w-full">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
+
+
+        {/* Experiencia del Cliente */}
+        <section id="experiencia-cliente" className="py-24 w-full relative overflow-hidden">
+          {/* Enhanced background with animated elements */}
+          <div className="absolute inset-0 bg-gradient-to-br from-secondary/5 via-primary/3 to-transparent"></div>
+          <div className="absolute top-20 right-1/4 w-64 h-64 bg-gradient-to-l from-secondary/10 to-primary/10 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-20 left-1/4 w-80 h-80 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1.5s'}}></div>
+          
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="text-center mb-20">
+              <div className="inline-flex items-center gap-2 bg-secondary/10 text-secondary px-4 py-2 rounded-full text-sm font-medium mb-6 animate-fade-up">
+                <Users className="h-4 w-4" />
+                Experiencia Centrada en el Cliente
+              </div>
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl mb-6 animate-fade-up">
-                Nuestro Proceso
+                Experiencia del Cliente
               </h2>
-              <p className="mx-auto max-w-[600px] text-lg text-muted-foreground animate-fade-up animate-delay-150">
-                Una metodología probada que garantiza resultados excepcionales en cada proyecto
+              <p className="mx-auto max-w-[700px] text-lg text-muted-foreground animate-fade-up animate-delay-150">
+                Descubre el viaje completo que experimentarás al trabajar con nosotros. 
+                Desde el primer contacto hasta el éxito continuo, cada paso está diseñado para tu satisfacción.
               </p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {processSteps.map((step, index) => (
-                <div key={step.step} className="text-center animate-fade-up" style={{animationDelay: `${index * 200}ms`}}>
-                  <div className="relative mb-6">
-                    <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <span className="text-2xl font-bold text-primary">{step.step}</span>
+            
+            {/* Client Journey Timeline */}
+            <div className="relative">
+              {/* Timeline line for desktop */}
+              <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-secondary/20 via-secondary/40 to-secondary/20 transform -translate-y-1/2 z-0"></div>
+              
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+                {/* Left Column - Journey Steps */}
+                <div className="space-y-8">
+                  {[
+                    {
+                      phase: "01",
+                      title: "Descubrimiento Inicial",
+                      description: "Tu primer contacto con nosotros marca el inicio de una colaboración transformadora",
+                      icon: <Search className="h-6 w-6" />,
+                      color: "from-blue-500 to-cyan-500",
+                      details: [
+                        "Consulta gratuita personalizada",
+                        "Análisis de necesidades específicas",
+                        "Identificación de oportunidades",
+                        "Presentación de propuesta inicial"
+                      ]
+                    },
+                    {
+                      phase: "02",
+                      title: "Planificación Estratégica",
+                      description: "Juntos diseñamos la hoja de ruta que llevará tu proyecto al éxito",
+                      icon: <Target className="h-6 w-6" />,
+                      color: "from-purple-500 to-pink-500",
+                      details: [
+                        "Definición de objetivos claros",
+                        "Cronograma detallado del proyecto",
+                        "Asignación de recursos especializados",
+                        "Establecimiento de métricas de éxito"
+                      ]
+                    },
+                    {
+                      phase: "03",
+                      title: "Desarrollo Colaborativo",
+                      description: "Trabajamos en equipo, manteniéndote informado en cada paso del proceso",
+                      icon: <Code className="h-6 w-6" />,
+                      color: "from-orange-500 to-red-500",
+                      details: [
+                        "Comunicación constante y transparente",
+                        "Sesiones de revisión regulares",
+                        "Demostraciones de progreso",
+                        "Ajustes basados en feedback"
+                      ]
+                    },
+                    {
+                      phase: "04",
+                      title: "Lanzamiento y Optimización",
+                      description: "Celebramos el éxito y continuamos optimizando para resultados excepcionales",
+                      icon: <Rocket className="h-6 w-6" />,
+                      color: "from-green-500 to-emerald-500",
+                      details: [
+                        "Implementación y lanzamiento",
+                        "Capacitación del equipo",
+                        "Monitoreo y optimización continua",
+                        "Soporte post-lanzamiento"
+                      ]
+                    }
+                  ].map((step, index) => (
+                    <div key={step.phase} className="relative group">
+                      <div className="glass rounded-2xl p-6 transition-all duration-500 hover:scale-105 hover:shadow-2xl animate-fade-up relative overflow-hidden" 
+                           style={{animationDelay: `${index * 150}ms`}}>
+                        
+                        {/* Background gradient overlay */}
+                        <div className={`absolute inset-0 bg-gradient-to-br ${step.color} opacity-5 group-hover:opacity-10 transition-opacity duration-500`}></div>
+                        
+                        <div className="relative z-10">
+                          <div className="flex items-start space-x-4">
+                            {/* Phase number and icon */}
+                            <div className="flex-shrink-0">
+                              <div className={`w-16 h-16 bg-gradient-to-br ${step.color} rounded-full flex items-center justify-center relative shadow-lg group-hover:shadow-xl transition-all duration-500 group-hover:scale-110`}>
+                                <div className="text-white">
+                                  {step.icon}
+                                </div>
+                                <div className="absolute -top-1 -right-1">
+                                  <Sparkles className="h-3 w-3 text-white animate-pulse" />
+                                </div>
+                              </div>
+                              <div className="text-center mt-2">
+                                <span className="text-sm font-bold text-primary">{step.phase}</span>
+                              </div>
+                            </div>
+                            
+                            {/* Content */}
+                            <div className="flex-1">
+                              <h3 className="text-xl font-semibold mb-3 group-hover:text-primary transition-colors duration-300">
+                                {step.title}
+                              </h3>
+                              <p className="text-muted-foreground mb-4 leading-relaxed">
+                                {step.description}
+                              </p>
+                              
+                              {/* Details list */}
+                              <div className="space-y-2">
+                                {step.details.map((detail, detailIndex) => (
+                                  <div key={detailIndex} className="flex items-center gap-2 text-sm text-muted-foreground">
+                                    <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
+                                    <span>{detail}</span>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        {/* Hover effect border */}
+                        <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${step.color} opacity-0 group-hover:opacity-20 transition-opacity duration-500`}></div>
+                      </div>
                     </div>
-                    <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto">
-                      {step.icon}
+                  ))}
+                </div>
+                
+                {/* Right Column - Client Benefits */}
+                <div className="space-y-8">
+                  <div className="glass rounded-2xl p-8 animate-fade-up animate-delay-300">
+                    <div className="text-center mb-8">
+                      <div className="w-20 h-20 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <Star className="h-10 w-10 text-primary" />
+                      </div>
+                      <h3 className="text-2xl font-bold mb-4">¿Por qué elegirnos?</h3>
+                      <p className="text-muted-foreground">
+                        Nuestra experiencia del cliente está diseñada para maximizar tu éxito
+                      </p>
+                    </div>
+                    
+                    <div className="space-y-6">
+                      {[
+                        {
+                          icon: <Shield className="h-6 w-6" />,
+                          title: "Transparencia Total",
+                          description: "Comunicación clara y honesta en cada etapa del proyecto"
+                        },
+                        {
+                          icon: <Clock className="h-6 w-6" />,
+                          title: "Cumplimiento de Plazos",
+                          description: "Entregamos en tiempo y forma, sin sorpresas"
+                        },
+                        {
+                          icon: <TrendingUp className="h-6 w-6" />,
+                          title: "Resultados Medibles",
+                          description: "Cada proyecto incluye métricas claras de ROI"
+                        },
+                        {
+                          icon: <Users className="h-6 w-6" />,
+                          title: "Soporte Continuo",
+                          description: "Estamos contigo antes, durante y después del proyecto"
+                        }
+                      ].map((benefit, index) => (
+                        <div key={benefit.title} className="flex items-start space-x-4">
+                          <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center flex-shrink-0">
+                            <div className="text-primary">
+                              {benefit.icon}
+                            </div>
+                          </div>
+                          <div>
+                            <h4 className="font-semibold mb-2">{benefit.title}</h4>
+                            <p className="text-sm text-muted-foreground">{benefit.description}</p>
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   </div>
-                  <h3 className="text-xl font-semibold mb-3">{step.title}</h3>
-                  <p className="text-muted-foreground">{step.description}</p>
+                  
+                  {/* Client Satisfaction Stats */}
+                  <div className="glass rounded-2xl p-8 animate-fade-up animate-delay-500">
+                    <h3 className="text-xl font-bold mb-6 text-center">Nuestros Números</h3>
+                    <div className="grid grid-cols-2 gap-6">
+                      <div className="text-center">
+                        <div className="text-3xl font-bold text-primary mb-2">98%</div>
+                        <div className="text-sm text-muted-foreground">Satisfacción del cliente</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-3xl font-bold text-primary mb-2">24h</div>
+                        <div className="text-sm text-muted-foreground">Tiempo de respuesta</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-3xl font-bold text-primary mb-2">100%</div>
+                        <div className="text-sm text-muted-foreground">Proyectos entregados</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-3xl font-bold text-primary mb-2">4.9/5</div>
+                        <div className="text-sm text-muted-foreground">Calificación promedio</div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              ))}
+              </div>
+              
+              {/* Bottom CTA */}
+              <div className="text-center mt-16 animate-fade-up animate-delay-600">
+                <div className="inline-flex items-center gap-2 bg-gradient-to-r from-primary/10 to-secondary/10 text-primary px-6 py-3 rounded-full text-sm font-medium mb-4">
+                  <Users className="h-4 w-4" />
+                  Experiencia Garantizada
+                </div>
+                <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
+                  Únete a cientos de clientes satisfechos que han transformado sus negocios con nuestra metodología probada. 
+                  Tu éxito es nuestro compromiso.
+                </p>
+                <Button size="lg" className="btn-primary text-lg px-8 py-6" onClick={handleCTA}>
+                  Comienza tu experiencia <ChevronRight className="ml-2 h-5 w-5" />
+                </Button>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Casos de Éxito */}
-        <section id="casos" className="py-20 bg-muted/30 w-full">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl mb-6 animate-fade-up">
-                Casos de Éxito
-              </h2>
-              <p className="mx-auto max-w-[600px] text-lg text-muted-foreground animate-fade-up animate-delay-150">
-                Descubre cómo hemos transformado negocios con nuestras soluciones digitales
-              </p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {testimonials.map((testimonial, index) => (
-                <div key={testimonial.name} className="glass rounded-xl p-8 animate-fade-up" style={{animationDelay: `${index * 200}ms`}}>
-                  <div className="flex items-center mb-6">
-                    <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mr-4">
-                      <span className="font-semibold text-primary">{testimonial.avatar}</span>
-                    </div>
-                    <div>
-                      <h4 className="font-semibold">{testimonial.name}</h4>
-                      <p className="text-sm text-muted-foreground">{testimonial.role}</p>
-                    </div>
-                  </div>
-                  <p className="text-muted-foreground italic">"{testimonial.content}"</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+
 
         {/* CTA Final */}
         <section id="contacto" className="py-20 w-full">
@@ -435,18 +598,30 @@ export function LandingPageComponent() {
               ))}
             </div>
             <div className="p-4 border-t border-border/40">
-              <div className="flex space-x-2">
+              <div className="flex space-x-2 mb-3">
                 <Input
                   value={inputMessage}
                   onChange={(e) => setInputMessage(e.target.value)}
                   placeholder="Escribe tu mensaje..."
                   onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
                   className="flex-1"
+                  disabled={isLoading}
                 />
-                <Button onClick={sendMessage} size="icon">
-                  <Send className="h-4 w-4" />
+                <Button onClick={sendMessage} size="icon" disabled={isLoading}>
+                  {isLoading ? (
+                    <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
+                  ) : (
+                    <Send className="h-4 w-4" />
+                  )}
                 </Button>
               </div>
+              <Button 
+                onClick={() => window.open(process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://calendly.com/avilamolinaadrian/30min', '_blank')}
+                className="w-full btn-primary text-sm"
+                size="sm"
+              >
+                📅 Agenda tu consulta gratuita
+              </Button>
             </div>
           </div>
         ) : (

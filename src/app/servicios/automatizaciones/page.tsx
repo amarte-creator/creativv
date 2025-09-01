@@ -7,23 +7,27 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 export default function AutomatizacionesPage() {
-  const [darkMode, setDarkMode] = React.useState(() => {
-    // Initialize from localStorage if available, otherwise default to false (light mode)
-    if (typeof window !== 'undefined') {
-      const savedMode = localStorage.getItem('darkMode')
-      return savedMode !== null ? savedMode === 'true' : false
-    }
-    return false
-  })
+  const [darkMode, setDarkMode] = React.useState(false)
+  const [mounted, setMounted] = React.useState(false)
 
   React.useEffect(() => {
-    // Apply the dark mode class to document
-    if (darkMode) {
-      document.documentElement.classList.add('dark')
-    } else {
-      document.documentElement.classList.remove('dark')
+    setMounted(true)
+    const savedMode = localStorage.getItem('darkMode')
+    if (savedMode !== null) {
+      setDarkMode(savedMode === 'true')
     }
-  }, [darkMode])
+  }, [])
+
+  React.useEffect(() => {
+    // Apply the dark mode class to document only after mounting
+    if (mounted) {
+      if (darkMode) {
+        document.documentElement.classList.add('dark')
+      } else {
+        document.documentElement.classList.remove('dark')
+      }
+    }
+  }, [darkMode, mounted])
 
   const handleToggleDarkMode = () => {
     const newMode = !darkMode
@@ -89,7 +93,7 @@ export default function AutomatizacionesPage() {
   ]
 
   return (
-    <div className={`min-h-screen flex flex-col w-full ${darkMode ? 'dark' : ''}`}>
+    <div className={`min-h-screen flex flex-col w-full ${mounted && darkMode ? 'dark' : ''}`}>
       {/* Header */}
       <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex h-16 items-center justify-between">

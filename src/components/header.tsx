@@ -22,7 +22,7 @@ export function Header({ darkMode, onToggleDarkMode, scrollToSection }: HeaderPr
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex h-16 items-center justify-between">
         <div className="flex items-center space-x-4">
-          <div className="flex items-center space-x-2">
+          <Link href="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
             <Image 
               src="/creativv-lg.png" 
               alt="Creativv" 
@@ -31,18 +31,12 @@ export function Header({ darkMode, onToggleDarkMode, scrollToSection }: HeaderPr
               className="rounded-lg"
             />
             <span className="text-xl font-bold gradient-text">Creativv</span>
-          </div>
+          </Link>
           <nav className="hidden md:flex space-x-6">
             {scrollToSection ? (
               <>
-                <Button variant="ghost" onClick={() => scrollToSection('inicio')} className="normal-case">
-                  inicio
-                </Button>
                 <Button variant="ghost" onClick={() => scrollToSection('servicios')} className="normal-case">
                   servicios
-                </Button>
-                <Button variant="ghost" onClick={() => scrollToSection('casos')} className="normal-case">
-                  casos
                 </Button>
                 <Link href="/blog">
                   <Button variant="ghost" className="normal-case">
@@ -56,13 +50,7 @@ export function Header({ darkMode, onToggleDarkMode, scrollToSection }: HeaderPr
             ) : (
               <>
                 <Button variant="ghost" asChild className="normal-case">
-                  <Link href="/">inicio</Link>
-                </Button>
-                <Button variant="ghost" asChild className="normal-case">
                   <Link href="/#servicios">servicios</Link>
-                </Button>
-                <Button variant="ghost" asChild className="normal-case">
-                  <Link href="/#casos">casos</Link>
                 </Button>
                 <Link href="/blog">
                   <Button variant="ghost" className="normal-case">
@@ -99,14 +87,8 @@ export function Header({ darkMode, onToggleDarkMode, scrollToSection }: HeaderPr
               <nav className="flex flex-col space-y-4 mt-8">
                 {scrollToSection ? (
                   <>
-                    <Button variant="ghost" onClick={() => scrollToSection('inicio')} className="normal-case">
-                      inicio
-                    </Button>
                     <Button variant="ghost" onClick={() => scrollToSection('servicios')} className="normal-case">
                       servicios
-                    </Button>
-                    <Button variant="ghost" onClick={() => scrollToSection('casos')} className="normal-case">
-                      casos
                     </Button>
                     <Link href="/blog">
                       <Button variant="ghost" className="normal-case">
@@ -120,13 +102,7 @@ export function Header({ darkMode, onToggleDarkMode, scrollToSection }: HeaderPr
                 ) : (
                   <>
                     <Button variant="ghost" asChild className="normal-case">
-                      <Link href="/">inicio</Link>
-                    </Button>
-                    <Button variant="ghost" asChild className="normal-case">
                       <Link href="/#servicios">servicios</Link>
-                    </Button>
-                    <Button variant="ghost" asChild className="normal-case">
-                      <Link href="/#casos">casos</Link>
                     </Button>
                     <Link href="/blog">
                       <Button variant="ghost" className="normal-case">

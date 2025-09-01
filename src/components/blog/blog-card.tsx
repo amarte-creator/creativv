@@ -58,7 +58,7 @@ export function BlogCard({ post, viewMode, featured }: BlogCardProps) {
                 </div>
               )}
               <div className="absolute top-4 right-4">
-                <Badge variant="secondary" className="bg-white/90 dark:bg-slate-800/90">
+                <Badge className="bg-gradient-to-r from-blue-500 to-purple-500 text-white border-0">
                   {post.category}
                 </Badge>
               </div>
@@ -134,7 +134,7 @@ export function BlogCard({ post, viewMode, featured }: BlogCardProps) {
           </div>
         )}
         <div className="absolute top-4 right-4">
-          <Badge variant="secondary" className="bg-white/90 dark:bg-slate-800/90">
+          <Badge className="bg-gradient-to-r from-blue-500 to-purple-500 text-white border-0">
             {post.category}
           </Badge>
         </div>

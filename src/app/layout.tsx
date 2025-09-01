@@ -34,13 +34,20 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: "/favicon.svg",
-        type: "image/svg+xml",
+        url: "/favicon-32x32.png?v=3",
+        type: "image/png",
+        sizes: "32x32",
+      },
+      {
+        url: "/creativv-lg.png?v=3",
+        type: "image/png",
+        sizes: "192x192",
       },
     ],
+    shortcut: "/favicon-32x32.png?v=3",
     apple: [
       {
-        url: "/creativv-lg.png",
+        url: "/creativv-lg.png?v=3",
         sizes: "180x180",
         type: "image/png",
       },
@@ -53,8 +60,22 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const timestamp = Date.now();
   return (
     <html lang="es">
+      <head>
+        <meta httpEquiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+        <meta httpEquiv="Pragma" content="no-cache" />
+        <meta httpEquiv="Expires" content="0" />
+        <link rel="icon" href={`/favicon-32x32.png?v=${timestamp}`} />
+        <link rel="icon" type="image/png" sizes="16x16" href={`/favicon-32x32.png?v=${timestamp}`} />
+        <link rel="icon" type="image/png" sizes="32x32" href={`/favicon-32x32.png?v=${timestamp}`} />
+        <link rel="icon" type="image/png" sizes="48x48" href={`/favicon-32x32.png?v=${timestamp}`} />
+        <link rel="icon" type="image/png" sizes="192x192" href={`/creativv-lg.png?v=${timestamp}`} />
+        <link rel="shortcut icon" href={`/favicon-32x32.png?v=${timestamp}`} />
+        <link rel="apple-touch-icon" sizes="180x180" href={`/creativv-lg.png?v=${timestamp}`} />
+        <link rel="manifest" href="/manifest.json" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
