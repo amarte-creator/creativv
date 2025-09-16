@@ -1,0 +1,180 @@
+{
+  "navigation": {
+    "services": "servicios",
+    "blog": "blog",
+    "contact": "contacto",
+    "openMenu": "Abrir menú"
+  },
+  "hero": {
+    "title1": "Transformamos ideas",
+    "title2": "en",
+    "title3": "impacto",
+    "title4": "digital",
+    "subtitle": "Somos expertos en transformación digital que ayudamos a empresas a escalar con tecnología de vanguardia. Desde automatizaciones con IA hasta desarrollo web, convertimos tus desafíos en oportunidades.",
+    "cta": "Agenda una consulta gratuita"
+  },
+  "about": {
+    "title": "Sobre Creativv",
+    "description": "En Creativv, creemos que la tecnología debe ser un catalizador para el crecimiento empresarial. Nuestra filosofía se basa en tres pilares fundamentales:",
+    "innovation": {
+      "title": "Innovación",
+      "description": "Utilizamos las últimas tecnologías para crear soluciones disruptivas"
+    },
+    "clarity": {
+      "title": "Claridad",
+      "description": "Comunicamos de forma transparente y medimos resultados concretos"
+    },
+    "impact": {
+      "title": "Impacto",
+      "description": "Nos enfocamos en generar valor real y medible para tu negocio"
+    },
+    "stats": {
+      "projects": "Proyectos completados",
+      "satisfaction": "Satisfacción del cliente",
+      "efficiency": "Mejora en eficiencia",
+      "support": "Soporte disponible"
+    }
+  },
+  "services": {
+    "title": "Nuestros Servicios",
+    "subtitle": "Soluciones integrales de transformación digital diseñadas para impulsar tu negocio al siguiente nivel",
+    "automation": {
+      "title": "Automatizaciones con IA y n8n",
+      "description": "Automatiza procesos complejos con inteligencia artificial y n8n",
+      "benefits": [
+        "Reducción del 80% en tareas repetitivas",
+        "Integración con más de 200 aplicaciones",
+        "Flujos de trabajo inteligentes con IA"
+      ]
+    },
+    "bi": {
+      "title": "Desarrollo BI (Business Intelligence)",
+      "description": "Transforma datos en decisiones estratégicas con dashboards inteligentes",
+      "benefits": [
+        "Dashboards interactivos personalizados",
+        "Análisis predictivo con IA",
+        "Reportes automatizados en tiempo real"
+      ]
+    },
+    "web": {
+      "title": "Desarrollo Web",
+      "description": "Creamos sitios web modernos que convierten visitantes en clientes",
+      "benefits": [
+        "Diseño UX/UI de vanguardia",
+        "Optimización para conversiones",
+        "Integración con sistemas empresariales"
+      ]
+    },
+    "learnMore": "Saber más"
+  },
+  "experience": {
+    "badge": "Experiencia Centrada en el Cliente",
+    "title": "Experiencia del Cliente",
+    "subtitle": "Descubre el viaje completo que experimentarás al trabajar con nosotros. Desde el primer contacto hasta el éxito continuo, cada paso está diseñado para tu satisfacción.",
+    "phases": {
+      "discovery": {
+        "number": "01",
+        "title": "Descubrimiento Inicial",
+        "description": "Tu primer contacto con nosotros marca el inicio de una colaboración transformadora",
+        "details": [
+          "Consulta gratuita personalizada",
+          "Análisis de necesidades específicas",
+          "Identificación de oportunidades",
+          "Presentación de propuesta inicial"
+        ]
+      },
+      "planning": {
+        "number": "02",
+        "title": "Planificación Estratégica",
+        "description": "Juntos diseñamos la hoja de ruta que llevará tu proyecto al éxito",
+        "details": [
+          "Definición de objetivos claros",
+          "Cronograma detallado del proyecto",
+          "Asignación de recursos especializados",
+          "Establecimiento de métricas de éxito"
+        ]
+      },
+      "development": {
+        "number": "03",
+        "title": "Desarrollo Colaborativo",
+        "description": "Trabajamos en equipo, manteniéndote informado en cada paso del proceso",
+        "details": [
+          "Comunicación constante y transparente",
+          "Sesiones de revisión regulares",
+          "Demostraciones de progreso",
+          "Ajustes basados en feedback"
+        ]
+      },
+      "launch": {
+        "number": "04",
+        "title": "Lanzamiento y Optimización",
+        "description": "Celebramos el éxito y continuamos optimizando para resultados excepcionales",
+        "details": [
+          "Implementación y lanzamiento",
+          "Capacitación del equipo",
+          "Monitoreo y optimización continua",
+          "Soporte post-lanzamiento"
+        ]
+      }
+    },
+    "benefits": {
+      "title": "¿Por qué elegirnos?",
+      "subtitle": "Nuestra experiencia del cliente está diseñada para maximizar tu éxito",
+      "transparency": {
+        "title": "Transparencia Total",
+        "description": "Comunicación clara y honesta en cada etapa del proyecto"
+      },
+      "timeliness": {
+        "title": "Cumplimiento de Plazos",
+        "description": "Entregamos en tiempo y forma, sin sorpresas"
+      },
+      "results": {
+        "title": "Resultados Medibles",
+        "description": "Cada proyecto incluye métricas claras de ROI"
+      },
+      "support": {
+        "title": "Soporte Continuo",
+        "description": "Estamos contigo antes, durante y después del proyecto"
+      }
+    },
+    "stats": {
+      "title": "Nuestros Números",
+      "satisfaction": "Satisfacción del cliente",
+      "responseTime": "Tiempo de respuesta",
+      "delivery": "Proyectos entregados",
+      "rating": "Calificación promedio"
+    }
+  },
+  "contact": {
+    "badge": "Experiencia Garantizada",
+    "title": "¿Listo para transformar tu negocio?",
+    "subtitle": "Únete a cientos de empresas que ya están escalando con tecnología de vanguardia. Tu transformación digital comienza aquí con nuestra metodología probada.",
+    "cta": "Comienza tu experiencia"
+  },
+  "footer": {
+    "copyright": "© 2025 Creativv. Todos los derechos reservados.",
+    "terms": "Términos",
+    "privacy": "Privacidad",
+    "contact": "Contacto"
+  },
+  "chat": {
+    "title": "Asistente Creativv",
+    "greeting": "¡Hola! Soy tu asistente Creativv. ¿En qué puedo ayudarte a transformar tu negocio hoy?",
+    "placeholder": "Escribe tu mensaje...",
+    "error": "Lo siento, tuve un problema procesando tu mensaje. ¿Podrías intentarlo de nuevo o contactarnos directamente?",
+    "scheduleCta": "📅 Agenda tu consulta gratuita"
+  },
+  "metadata": {
+    "title": "Creativv - Transformamos ideas en impacto digital",
+    "description": "Expertos en transformación digital. Automatizaciones con IA, desarrollo BI y desarrollo web para escalar tu negocio.",
+    "keywords": "transformación digital, automatización, IA, business intelligence, desarrollo web, n8n"
+  },
+  "routes": {
+    "home": "/",
+    "services": "/servicios",
+    "automation": "/servicios/automatizaciones",
+    "bi": "/servicios/business-intelligence",
+    "web": "/servicios/desarrollo-web",
+    "blog": "/blog"
+  }
+}

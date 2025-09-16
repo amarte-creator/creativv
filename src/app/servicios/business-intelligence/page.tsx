@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { BarChart2, TrendingUp, CheckCircle, ArrowLeft, Users, Clock, Database, BarChart3, Cpu, Sun, Moon, PieChart, LineChart, Activity } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { Footer } from '@/components/footer'
 
 export default function BusinessIntelligencePage() {
   const [darkMode, setDarkMode] = React.useState(false)
@@ -148,14 +149,6 @@ export default function BusinessIntelligencePage() {
                 Transforma datos en decisiones estratégicas. Creamos dashboards inteligentes 
                 que te dan el poder de ver el futuro de tu negocio con claridad.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 animate-fade-up animate-delay-300">
-                <Button size="lg" className="btn-primary text-lg px-8 py-6">
-                  Solicitar Demo Gratuita
-                </Button>
-                <Button size="lg" variant="outline" className="text-lg px-8 py-6">
-                  Ver Dashboards de Ejemplo
-                </Button>
-              </div>
             </div>
           </div>
         </section>
@@ -274,36 +267,18 @@ export default function BusinessIntelligencePage() {
             <p className="mx-auto max-w-[600px] text-lg text-muted-foreground mb-8 animate-fade-up animate-delay-150">
               Agenda una consulta gratuita y descubre cómo podemos convertir tus datos en ventajas competitivas
             </p>
-            <Button size="lg" className="btn-primary text-lg px-8 py-6 animate-fade-up animate-delay-300">
-              Comenzar Ahora
+            <Button 
+              size="lg" 
+              className="btn-primary text-lg px-8 py-6 animate-fade-up animate-delay-300"
+              onClick={() => window.open(process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://calendly.com/avilamolinaadrian/30min', '_blank')}
+            >
+              Comenzar ahora
             </Button>
           </div>
         </section>
       </main>
 
-      {/* Footer */}
-      <footer className="border-t border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 w-full">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-between gap-4 py-10 md:h-24 md:flex-row md:py-0">
-          <div className="flex items-center space-x-2">
-            <Image 
-              src="/creativv-lg.png" 
-              alt="Creativv" 
-              width={32} 
-              height={32}
-              className="rounded-lg"
-            />
-            <span className="text-lg font-bold gradient-text">Creativv</span>
-          </div>
-          <div className="text-center text-sm leading-loose text-muted-foreground md:text-left">
-            © 2024 Creativv. Todos los derechos reservados.
-          </div>
-          <div className="flex gap-6">
-            <Link href="/" className="text-sm font-medium hover:underline underline-offset-4">inicio</Link>
-            <Link href="/servicios" className="text-sm font-medium hover:underline underline-offset-4">servicios</Link>
-            <Link href="/contacto" className="text-sm font-medium hover:underline underline-offset-4">contacto</Link>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }

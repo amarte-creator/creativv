@@ -22,6 +22,16 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 import { Switch } from "@/components/ui/switch"
+import { Footer } from "@/components/footer"
+
+declare global {
+  interface Window {
+    UnicornStudio?: {
+      isInitialized?: boolean
+      init?: () => void
+    }
+  }
+}
 
 export function LandingPageComponent() {
   const [isChatOpen, setIsChatOpen] = React.useState(false)
@@ -32,12 +42,49 @@ export function LandingPageComponent() {
   const [darkMode, setDarkMode] = React.useState(false)
   const [mounted, setMounted] = React.useState(false)
   const [isLoading, setIsLoading] = React.useState(false)
+  const [unicornStudioMounted, setUnicornStudioMounted] = React.useState(false)
 
   React.useEffect(() => {
     setMounted(true)
     const savedMode = localStorage.getItem('darkMode')
     if (savedMode !== null) {
       setDarkMode(savedMode === 'true')
+    }
+    
+    // Set UnicornStudio mounted after component mounts
+    setUnicornStudioMounted(true)
+    
+    // Load UnicornStudio script
+    if (typeof window !== 'undefined' && !window.UnicornStudio) {
+      window.UnicornStudio = { isInitialized: false }
+      
+      const script = document.createElement('script')
+      script.src = 'https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.4.30/dist/unicornStudio.umd.js'
+      script.onload = function() {
+        console.log('UnicornStudio script loaded')
+        const us = window.UnicornStudio ?? { isInitialized: false }
+        window.UnicornStudio = us
+        if (!us.isInitialized) {
+          us.init?.()
+          us.isInitialized = true
+          console.log('UnicornStudio initialized')
+          
+          // Hide badges after initialization
+          setTimeout(() => {
+            hideUnicornStudioBadges()
+          }, 1000)
+          
+          // Run badge hiding periodically
+          setTimeout(() => {
+            hideUnicornStudioBadges()
+          }, 3000)
+          
+          setTimeout(() => {
+            hideUnicornStudioBadges()
+          }, 5000)
+        }
+      }
+      document.head.appendChild(script)
     }
   }, [])
 
@@ -51,6 +98,28 @@ export function LandingPageComponent() {
       }
     }
   }, [darkMode, mounted])
+
+  // Observe DOM changes to remove UnicornStudio badges dynamically (including shadow DOM)
+  React.useEffect(() => {
+    if (!mounted) return
+
+    const observedShadowRoots = new WeakSet<Node>()
+
+    const handle = () => {
+      hideUnicornStudioBadgesDeep()
+      observeAllShadowRoots()
+    }
+
+    const observer = new MutationObserver(() => {
+      handle()
+    })
+    observer.observe(document.body, { childList: true, subtree: true, attributes: true })
+
+    // Initial sweep
+    handle()
+
+    return () => observer.disconnect()
+  }, [mounted])
 
   const handleToggleDarkMode = () => {
     const newMode = !darkMode
@@ -163,6 +232,143 @@ export function LandingPageComponent() {
     window.open(process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://calendly.com/avilamolinaadrian/30min', '_blank')
   }
 
+  // Function to hide UnicornStudio badges
+  const hideUnicornStudioBadges = () => {
+    // Hide elements by position and content
+    const allDivs = document.querySelectorAll('div')
+    const allLinks = document.querySelectorAll('a')
+    const allImages = document.querySelectorAll('img')
+    
+    // Check divs for badges
+    allDivs.forEach((element) => {
+      const style = element.getAttribute('style') || ''
+      const text = element.textContent || ''
+      
+      if ((style.includes('position: fixed') && (style.includes('bottom') || style.includes('right'))) ||
+          text.includes('UnicornStudio') || 
+          text.includes('Made with') ||
+          text.includes('Powered by')) {
+        element.style.display = 'none'
+      }
+    })
+    
+    // Check links for UnicornStudio references
+    allLinks.forEach((element) => {
+      const href = element.getAttribute('href') || ''
+      const text = element.textContent || ''
+      const style = element.getAttribute('style') || ''
+      
+      if (href.includes('unicornstudio') || 
+          href.includes('unicorn.studio') ||
+          text.includes('UnicornStudio') ||
+          text.includes('Made with') ||
+          (style.includes('position: absolute') && style.includes('bottom: 30px')) ||
+          (style.includes('z-index: 99999999')) ||
+          (style.includes('width: 190px') && style.includes('background-color: rgb(255, 255, 255)'))) {
+        element.style.display = 'none'
+      }
+    })
+    
+    // Check images for UnicornStudio badge images
+    allImages.forEach((element) => {
+      const src = element.getAttribute('src') || ''
+      const alt = element.getAttribute('alt') || ''
+      
+      if (src.includes('unicorn.studio') || 
+          src.includes('made_in_us_small_web.svg') ||
+          alt.includes('Made with unicorn.studio') ||
+          alt.includes('unicorn.studio')) {
+        element.style.display = 'none'
+      }
+    })
+  }
+
+  // Deep removal: traverse regular DOM and shadow DOM to hide/remove badges
+  const hideUnicornStudioBadgesDeep = () => {
+    const isBadgeAnchor = (el: Element): boolean => {
+      const href = (el as HTMLAnchorElement).getAttribute?.('href') || ''
+      const style = el.getAttribute?.('style') || ''
+      const text = (el.textContent || '')
+      return (
+        el.tagName === 'A' && (
+          href.includes('unicorn.studio') ||
+          href.includes('unicornstudio') ||
+          text.includes('UnicornStudio') ||
+          style.includes('position: absolute') && style.includes('bottom: 30px') ||
+          style.includes('z-index: 99999999')
+        )
+      )
+    }
+
+    const isBadgeImage = (el: Element): boolean => {
+      const src = (el as HTMLImageElement).getAttribute?.('src') || ''
+      const alt = (el as HTMLImageElement).getAttribute?.('alt') || ''
+      return (
+        el.tagName === 'IMG' && (
+          src.includes('unicorn.studio') ||
+          src.includes('made_in_us_small_web.svg') ||
+          alt.includes('unicorn.studio') ||
+          alt.toLowerCase().includes('made with')
+        )
+      )
+    }
+
+    const hideOrRemove = (el: Element) => {
+      try {
+        if (isBadgeAnchor(el)) {
+          el.remove()
+          return
+        }
+        if (isBadgeImage(el)) {
+          const parent = el.parentElement
+          if (parent && parent.tagName === 'A') {
+            parent.remove()
+          } else {
+            el.remove()
+          }
+          return
+        }
+        const style = el.getAttribute?.('style') || ''
+        const text = (el.textContent || '')
+        if ((style.includes('position: fixed') && (style.includes('bottom') || style.includes('right'))) ||
+            text.includes('UnicornStudio') || text.toLowerCase().includes('unicorn.studio') || text.toLowerCase().includes('made with') || text.toLowerCase().includes('powered by')) {
+          (el as HTMLElement).style.display = 'none'
+        }
+      } catch {}
+    }
+
+    const traverse = (node: Node) => {
+      if (node instanceof Element) {
+        hideOrRemove(node)
+        const anyNode = node as any
+        if (anyNode.shadowRoot) {
+          traverse(anyNode.shadowRoot as unknown as Node)
+        }
+      }
+      node.childNodes.forEach(traverse)
+    }
+
+    traverse(document.body)
+  }
+
+  // Attach mutation observers to all discovered shadow roots so late-added badges get caught
+  const observeAllShadowRoots = () => {
+    const attachForNode = (node: Node) => {
+      const el = node as any
+      if (el && el.shadowRoot && el.__usObserved !== true) {
+        try {
+          const shadowObserver = new MutationObserver(() => {
+            hideUnicornStudioBadgesDeep()
+          })
+          shadowObserver.observe(el.shadowRoot, { childList: true, subtree: true, attributes: true })
+          el.__usObserved = true
+        } catch {}
+      }
+      node.childNodes.forEach(attachForNode)
+    }
+    attachForNode(document.body)
+  }
+
   return (
     <div className={`min-h-screen flex flex-col w-full ${mounted && darkMode ? 'dark' : ''}`}>
       <Header 
@@ -173,24 +379,56 @@ export function LandingPageComponent() {
 
       <main className="flex-grow w-full">
         {/* Hero Section */}
-        <section id="inicio" className="py-24 relative overflow-hidden w-full">
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-secondary/5 to-transparent"></div>
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div className="flex flex-col items-center space-y-8 text-center">
-              <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl animate-fade-up">
-                Transformamos ideas en{" "}
-                <span className="gradient-text">impacto digital</span>
-              </h1>
-              <p className="mx-auto max-w-[800px] text-muted-foreground text-lg md:text-xl animate-fade-up animate-delay-150">
-                Somos expertos en transformación digital que ayudamos a empresas a escalar con tecnología de vanguardia. 
-                Desde automatizaciones con IA hasta desarrollo web, convertimos tus desafíos en oportunidades.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 animate-fade-up animate-delay-300">
-                <Button size="lg" className="btn-primary text-lg px-8 py-6" onClick={handleCTA}>
-                  Agenda una consulta gratuita <ChevronRight className="ml-2 h-5 w-5" />
-                </Button>
-              </div>
+        <section id="inicio" className="py-24 relative overflow-hidden w-full min-h-screen flex items-center">
+          {/* UnicornStudio Background - Only render on client side */}
+          {unicornStudioMounted && (
+            <div className="absolute inset-0 w-full h-full">
+              {/* Fallback gradient background */}
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-pink-500/20"></div>
+              
+              <div 
+                data-us-project="zKuwGLh6nlyf57ymyEfW" 
+                style={{
+                  width: '100%', 
+                  height: '100%',
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  zIndex: 1
+                }}
+              ></div>
             </div>
+          )}
+          
+          {/* Lighter overlays to make background more visible */}
+          <div className="absolute inset-0 bg-gradient-to-br from-black/20 via-black/10 to-black/30 dark:from-black/30 dark:via-black/20 dark:to-black/40 z-10"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/8 via-secondary/4 to-transparent z-10"></div>
+          {/* Subtle animated gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/3 via-transparent to-secondary/3 animate-pulse opacity-40 z-10"></div>
+          
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
+            <div className="flex flex-col items-center text-center space-y-8 animate-fade-up">
+          <h1 className="text-4xl font-extrabold tracking-tight leading-[1.1] sm:text-5xl md:text-6xl lg:text-7xl drop-shadow-[0_10px_30px_rgba(0,0,0,0.7)]">
+            <div className="text-white/80 font-medium">Transformamos ideas</div>
+            <div className="text-white/60 font-light text-3xl sm:text-4xl md:text-5xl lg:text-6xl italic">en</div>
+            <div className="text-white font-black drop-shadow-[0_10px_30px_rgba(0,0,0,0.7)]">impacto</div>
+            <div className="text-white font-black drop-shadow-[0_10px_30px_rgba(0,0,0,0.7)]">digital</div>
+          </h1>
+              <p className="mx-auto max-w-3xl text-white/95 md:text-lg lg:text-xl leading-relaxed drop-shadow-[0_6px_24px_rgba(0,0,0,0.75)]">
+                Somos expertos en transformación digital que ayudamos a empresas a escalar con tecnología de vanguardia. Desde automatizaciones con IA hasta desarrollo web, convertimos tus desafíos en oportunidades.
+              </p>
+            </div>
+          </div>
+
+          {/* CTA at the very bottom of the section */}
+          <div className="absolute bottom-6 left-0 right-0 flex justify-center z-30 animate-fade-up animate-delay-300">
+            <Button 
+              size="lg" 
+              className="btn-primary text-lg px-8 py-6 shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 backdrop-blur-md bg-primary/95 hover:bg-primary"
+              onClick={handleCTA}
+            >
+              Agenda una consulta gratuita <ChevronRight className="ml-2 h-5 w-5" />
+            </Button>
           </div>
         </section>
 
@@ -263,8 +501,13 @@ export function LandingPageComponent() {
         </section>
 
         {/* Servicios */}
-        <section id="servicios" className="py-20 bg-muted/30 w-full">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+         <section id="servicios" className="py-24 w-full relative overflow-hidden">
+          {/* Enhanced background with animated elements */}
+          <div className="absolute inset-0 bg-gradient-to-br from-secondary/5 via-primary/3 to-transparent"></div>
+          <div className="absolute top-20 right-1/4 w-64 h-64 bg-gradient-to-l from-secondary/10 to-primary/10 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-20 left-1/4 w-80 h-80 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1.5s'}}></div>
+          
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center mb-16">
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl mb-6 animate-fade-up">
                 Nuestros Servicios
@@ -516,67 +759,32 @@ export function LandingPageComponent() {
                   </div>
                 </div>
               </div>
-              
-              {/* Bottom CTA */}
-              <div className="text-center mt-16 animate-fade-up animate-delay-600">
-                <div className="inline-flex items-center gap-2 bg-gradient-to-r from-primary/10 to-secondary/10 text-primary px-6 py-3 rounded-full text-sm font-medium mb-4">
-                  <Users className="h-4 w-4" />
-                  Experiencia Garantizada
-                </div>
-                <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-                  Únete a cientos de clientes satisfechos que han transformado sus negocios con nuestra metodología probada. 
-                  Tu éxito es nuestro compromiso.
-                </p>
-                <Button size="lg" className="btn-primary text-lg px-8 py-6" onClick={handleCTA}>
-                  Comienza tu experiencia <ChevronRight className="ml-2 h-5 w-5" />
-                </Button>
-              </div>
             </div>
           </div>
         </section>
 
-
-
         {/* CTA Final */}
         <section id="contacto" className="py-20 w-full">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl mb-6 animate-fade-up">
+            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-primary/10 to-secondary/10 text-primary px-6 py-3 rounded-full text-sm font-medium mb-6 animate-fade-up">
+              <Users className="h-4 w-4" />
+              Experiencia Garantizada
+            </div>
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl mb-6 animate-fade-up animate-delay-150">
               ¿Listo para transformar tu negocio?
             </h2>
-            <p className="mx-auto max-w-[600px] text-lg text-muted-foreground mb-8 animate-fade-up animate-delay-150">
-              Únete a las empresas que ya están escalando con tecnología de vanguardia. 
-              Tu transformación digital comienza aquí.
+            <p className="mx-auto max-w-[600px] text-lg text-muted-foreground mb-8 animate-fade-up animate-delay-300">
+              Únete a cientos de empresas que ya están escalando con tecnología de vanguardia. 
+              Tu transformación digital comienza aquí con nuestra metodología probada.
             </p>
-            <Button size="lg" className="btn-primary text-lg px-8 py-6 animate-fade-up animate-delay-300" onClick={handleCTA}>
-              Agenda una demo <ChevronRight className="ml-2 h-5 w-5" />
+            <Button size="lg" className="btn-primary text-lg px-8 py-6 animate-fade-up animate-delay-450" onClick={handleCTA}>
+              Comienza tu experiencia <ChevronRight className="ml-2 h-5 w-5" />
             </Button>
           </div>
         </section>
       </main>
 
-      {/* Footer */}
-      <footer className="border-t border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 w-full">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-between gap-4 py-10 md:h-24 md:flex-row md:py-0">
-          <div className="flex items-center space-x-2">
-            <Image 
-              src="/creativv-lg.png" 
-              alt="Creativv" 
-              width={32} 
-              height={32}
-              className="rounded-lg"
-            />
-            <span className="text-lg font-bold gradient-text">Creativv</span>
-          </div>
-          <div className="text-center text-sm leading-loose text-muted-foreground md:text-left">
-            © 2024 Creativv. Todos los derechos reservados.
-          </div>
-          <div className="flex gap-6">
-            <a href="#" className="text-sm font-medium hover:underline underline-offset-4">Términos</a>
-            <a href="#" className="text-sm font-medium hover:underline underline-offset-4">Privacidad</a>
-            <a href="#" className="text-sm font-medium hover:underline underline-offset-4">contacto</a>
-          </div>
-        </div>
-      </footer>
+      <Footer />
 
       {/* Chatbot */}
       <div className={`fixed bottom-4 right-4 z-50 ${isChatOpen ? 'w-80' : 'w-auto'} transition-all duration-300`}>

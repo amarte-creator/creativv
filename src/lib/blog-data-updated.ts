@@ -11,6 +11,7 @@ export interface BlogPost {
   tags: string[];
   image: string;
   content?: string;
+  hidden?: boolean;
 }
 
 export const blogPosts: BlogPost[] = [
@@ -26,7 +27,8 @@ export const blogPosts: BlogPost[] = [
     featured: true,
     tags: ["n8n", "IA", "automatización", "productividad"],
     image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=400&fit=crop&crop=center",
-    content: `...`
+    content: `...`,
+    hidden: true
   },
   {
     id: 2,
@@ -39,7 +41,7 @@ export const blogPosts: BlogPost[] = [
     author: "Equipo Creativv",
     featured: true,
     tags: ["BI", "datos", "analytics", "decisiones"],
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=400&fit=crop&crop=center",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=400&fit=crop&crop=center",
     content: `...`
   },
   {
@@ -54,7 +56,8 @@ export const blogPosts: BlogPost[] = [
     featured: false,
     tags: ["React", "Next.js", "desarrollo web", "frontend"],
     image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&h=400&fit=crop&crop=center",
-    content: `...`
+    content: `...`,
+    hidden: true
   },
   {
     id: 4,
@@ -68,7 +71,8 @@ export const blogPosts: BlogPost[] = [
     featured: false,
     tags: ["SEO", "optimización", "tráfico", "posicionamiento"],
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=400&fit=crop&crop=center",
-    content: `...`
+    content: `...`,
+    hidden: true
   },
   {
     id: 5,
@@ -82,7 +86,8 @@ export const blogPosts: BlogPost[] = [
     featured: false,
     tags: ["APIs", "integración", "automatización", "herramientas"],
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=400&fit=crop&crop=center",
-    content: `...`
+    content: `...`,
+    hidden: true
   },
   {
     id: 6,
@@ -95,7 +100,7 @@ export const blogPosts: BlogPost[] = [
     author: "Equipo Creativv",
     featured: false,
     tags: ["dashboards", "visualización", "datos", "BI"],
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=400&fit=crop&crop=center",
+    image: "https://images.unsplash.com/photo-1543286386-713bdd548da4?w=800&h=400&fit=crop&crop=center",
     content: `...`
   },
   {
@@ -110,7 +115,8 @@ export const blogPosts: BlogPost[] = [
     featured: false,
     tags: ["Machine Learning", "IA", "casos de uso", "negocios"],
     image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=400&fit=crop&crop=center",
-    content: `...`
+    content: `...`,
+    hidden: true
   },
   {
     id: 8,
@@ -124,7 +130,8 @@ export const blogPosts: BlogPost[] = [
     featured: false,
     tags: ["microservicios", "arquitectura", "escalabilidad", "desarrollo"],
     image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&h=400&fit=crop&crop=center",
-    content: `...`
+    content: `...`,
+    hidden: true
   },
   {
     id: 9,
@@ -138,6 +145,7 @@ export const blogPosts: BlogPost[] = [
     featured: false,
     tags: ["analytics", "Google Analytics", "datos", "usuarios"],
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=400&fit=crop&crop=center",
-    content: `...`
+    content: `...`,
+    hidden: true
   }
 ];

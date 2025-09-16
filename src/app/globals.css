@@ -23,8 +23,8 @@ body {
     --secondary-foreground: 0 0% 100%;
     --muted: 0 0% 96%; /* Very Light Gray */
     --muted-foreground: 0 0% 45%; /* Medium Gray */
-    --accent: 217 100% 58%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 0 0% 96%; /* Light Gray */
+    --accent-foreground: 0 0% 10%; /* Dark Text */
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
     --border: 0 0% 90%; /* Light Border */
@@ -52,8 +52,8 @@ body {
     --secondary-foreground: 0 0% 100%;
     --muted: 0 0% 15%;
     --muted-foreground: 0 0% 69%; /* Light Gray #B0B0B5 */
-    --accent: 217 100% 58%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 0 0% 20%; /* Dark Gray */
+    --accent-foreground: 0 0% 96%; /* Light Text */
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
     --border: 0 0% 20%;
@@ -94,7 +94,6 @@ body {
   button {
     font-family: var(--font-geist-sans), 'Poppins', sans-serif;
     font-weight: 600;
-    text-transform: uppercase;
   }
 }
 
@@ -433,4 +432,61 @@ html {
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
+}
+
+/* Hide UnicornStudio badge and branding */
+[data-us-project] + div,
+[data-us-project] ~ div,
+div[style*="position: fixed"][style*="bottom"],
+div[style*="position: fixed"][style*="right"],
+div[style*="position: fixed"][style*="z-index"] {
+  display: none !important;
+}
+
+/* Hide any UnicornStudio branding elements */
+div[style*="unicornstudio"],
+div[style*="UnicornStudio"],
+a[href*="unicornstudio"],
+a[href*="UnicornStudio"],
+div[style*="background"][style*="unicornstudio"] {
+  display: none !important;
+}
+
+/* Hide elements containing UnicornStudio text - using JavaScript instead of CSS :contains */
+/* Note: :contains() is not supported in standard CSS, so we rely on JavaScript for text-based hiding */
+
+/* Additional selectors for common badge patterns */
+div[style*="bottom: 10px"],
+div[style*="bottom: 20px"],
+div[style*="right: 10px"],
+div[style*="right: 20px"],
+div[style*="z-index: 9999"],
+div[style*="z-index: 10000"] {
+  display: none !important;
+}
+
+/* Hide specific UnicornStudio badge */
+a[href*="unicorn.studio"][style*="position: absolute"][style*="bottom: 30px"],
+a[href*="unicorn.studio"][style*="z-index: 99999999"],
+a[href*="unicorn.studio"][style*="width: 190px"],
+a[href*="unicorn.studio"][style*="background-color: rgb(255, 255, 255)"],
+a[href*="unicorn.studio"][style*="box-shadow: rgba(0, 0, 0, 0.2)"],
+a[href*="unicorn.studio"][style*="padding: 10px"],
+a[href*="unicorn.studio"][style*="border-radius: 6px"] {
+  display: none !important;
+}
+
+/* Hide UnicornStudio badge images */
+img[src*="unicorn.studio"],
+img[src*="made_in_us_small_web.svg"],
+img[alt*="Made with unicorn.studio"],
+img[alt*="unicorn.studio"] {
+  display: none !important;
+}
+
+/* Hide any element with the specific UnicornStudio badge styling */
+a[style*="position: absolute"][style*="bottom: 30px"][style*="left: 0px"][style*="width: 190px"],
+a[style*="z-index: 99999999"][style*="background-color: rgb(255, 255, 255)"],
+a[style*="box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 9px 0px"] {
+  display: none !important;
 }

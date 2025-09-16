@@ -102,7 +102,7 @@ export function BlogCard({ post, viewMode, featured }: BlogCardProps) {
 
             <div className="flex items-center justify-between">
               <Link href={`/blog/${post.slug}`}>
-                <Button className="group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                <Button className="group-hover:bg-gradient-to-r group-hover:from-primary group-hover:to-secondary group-hover:text-white transition-all duration-300">
                   Leer más
                   <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Button>
@@ -175,7 +175,7 @@ export function BlogCard({ post, viewMode, featured }: BlogCardProps) {
             {post.author}
           </div>
           <Link href={`/blog/${post.slug}`}>
-            <Button size="sm" className="group-hover:bg-blue-600 group-hover:text-white transition-colors">
+            <Button size="sm" className="group-hover:bg-gradient-to-r group-hover:from-primary group-hover:to-secondary group-hover:text-white transition-all duration-300">
               Leer más
               <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
             </Button>

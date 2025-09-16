@@ -60,7 +60,7 @@ export function BlogHero() {
               />
               <Button
                 type="submit"
-                className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-2 rounded-full transition-all duration-200 shadow-lg hover:shadow-xl"
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-white px-6 py-2 rounded-full transition-all duration-200 shadow-lg"
               >
                 Buscar
               </Button>

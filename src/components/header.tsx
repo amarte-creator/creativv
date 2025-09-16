@@ -35,29 +35,29 @@ export function Header({ darkMode, onToggleDarkMode, scrollToSection }: HeaderPr
           <nav className="hidden md:flex space-x-6">
             {scrollToSection ? (
               <>
-                <Button variant="ghost" onClick={() => scrollToSection('servicios')} className="normal-case">
+                <Button variant="ghost" onClick={() => scrollToSection('servicios')} className="capitalize font-medium">
                   servicios
                 </Button>
                 <Link href="/blog">
-                  <Button variant="ghost" className="normal-case">
+                  <Button variant="ghost" className="capitalize font-medium">
                     blog
                   </Button>
                 </Link>
-                <Button variant="ghost" onClick={() => scrollToSection('contacto')} className="normal-case">
+                <Button variant="ghost" onClick={() => scrollToSection('contacto')} className="capitalize font-medium">
                   contacto
                 </Button>
               </>
             ) : (
               <>
-                <Button variant="ghost" asChild className="normal-case">
+                <Button variant="ghost" asChild className="capitalize font-medium">
                   <Link href="/#servicios">servicios</Link>
                 </Button>
                 <Link href="/blog">
-                  <Button variant="ghost" className="normal-case">
+                  <Button variant="ghost" className="capitalize font-medium">
                     blog
                   </Button>
                 </Link>
-                <Button variant="ghost" asChild className="normal-case">
+                <Button variant="ghost" asChild className="capitalize font-medium">
                   <Link href="/#contacto">contacto</Link>
                 </Button>
               </>
@@ -84,32 +84,32 @@ export function Header({ darkMode, onToggleDarkMode, scrollToSection }: HeaderPr
               </Button>
             </SheetTrigger>
             <SheetContent side="left" className="w-[300px]">
-              <nav className="flex flex-col space-y-4 mt-8">
+              <nav className="flex flex-col space-y-6 mt-8 px-2">
                 {scrollToSection ? (
                   <>
-                    <Button variant="ghost" onClick={() => scrollToSection('servicios')} className="normal-case">
+                    <Button variant="ghost" onClick={() => scrollToSection('servicios')} className="capitalize font-medium text-left justify-start h-12 text-base">
                       servicios
                     </Button>
                     <Link href="/blog">
-                      <Button variant="ghost" className="normal-case">
+                      <Button variant="ghost" className="capitalize font-medium text-left justify-start h-12 text-base w-full">
                         blog
                       </Button>
                     </Link>
-                    <Button variant="ghost" onClick={() => scrollToSection('contacto')} className="normal-case">
+                    <Button variant="ghost" onClick={() => scrollToSection('contacto')} className="capitalize font-medium text-left justify-start h-12 text-base">
                       contacto
                     </Button>
                   </>
                 ) : (
                   <>
-                    <Button variant="ghost" asChild className="normal-case">
+                    <Button variant="ghost" asChild className="capitalize font-medium text-left justify-start h-12 text-base">
                       <Link href="/#servicios">servicios</Link>
                     </Button>
                     <Link href="/blog">
-                      <Button variant="ghost" className="normal-case">
+                      <Button variant="ghost" className="capitalize font-medium text-left justify-start h-12 text-base w-full">
                         blog
                       </Button>
                     </Link>
-                    <Button variant="ghost" asChild className="normal-case">
+                    <Button variant="ghost" asChild className="capitalize font-medium text-left justify-start h-12 text-base">
                       <Link href="/#contacto">contacto</Link>
                     </Button>
                   </>

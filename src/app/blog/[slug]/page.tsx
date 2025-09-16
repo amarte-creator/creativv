@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { BlogPost } from "@/components/blog/blog-post";
 import { RelatedPosts } from "@/components/blog/related-posts";
 import { BlogLayout } from "@/components/blog-layout";
-import { blogPosts } from "@/lib/blog-data";
+import { blogPosts } from "@/lib/blog-data-updated";
 
 interface BlogPostPageProps {
   params: {
@@ -49,7 +49,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
   }
 
   const relatedPosts = blogPosts
-    .filter(p => p.id !== post.id && p.category === post.category)
+    .filter(p => p.id !== post.id && p.category === post.category && !p.hidden)
     .slice(0, 3);
 
   return (

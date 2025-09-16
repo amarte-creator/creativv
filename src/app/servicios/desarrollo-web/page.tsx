@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Code, Globe, CheckCircle, ArrowLeft, Users, Clock, Database, BarChart3, Cpu, Sun, Moon, Smartphone, Zap, Palette, Shield, ShoppingCart, Target, Sparkles, Star, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { Footer } from '@/components/footer'
 
 export default function DesarrolloWebPage() {
   const [darkMode, setDarkMode] = React.useState(false)
@@ -197,16 +198,6 @@ export default function DesarrolloWebPage() {
                 Creamos sitios web modernos que convierten visitantes en clientes. 
                 Diseño, desarrollo y optimización para maximizar tu presencia digital.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 animate-fade-up animate-delay-300">
-                <Button size="lg" className="btn-primary text-lg px-8 py-6 relative overflow-hidden group">
-                  <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                  <span className="relative z-10">Solicitar Presupuesto</span>
-                  <ArrowRight className="h-4 w-4 ml-2 relative z-10 transition-transform group-hover:translate-x-1" />
-                </Button>
-                <Button size="lg" variant="outline" className="text-lg px-8 py-6 group hover:bg-gradient-to-r hover:from-primary/10 hover:to-secondary/10 transition-all duration-300">
-                  Ver Portafolio
-                </Button>
-              </div>
             </div>
           </div>
         </section>
@@ -361,41 +352,20 @@ export default function DesarrolloWebPage() {
             <p className="mx-auto max-w-[600px] text-lg text-muted-foreground mb-8 animate-fade-up animate-delay-150 leading-relaxed">
               Agenda una consulta gratuita y descubre cómo podemos crear el sitio web perfecto para tu negocio
             </p>
-            <Button size="lg" className="btn-primary text-lg px-8 py-6 relative overflow-hidden group animate-fade-up animate-delay-300">
+            <Button 
+              size="lg" 
+              className="btn-primary text-lg px-8 py-6 relative overflow-hidden group animate-fade-up animate-delay-300"
+              onClick={() => window.open(process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://calendly.com/avilamolinaadrian/30min', '_blank')}
+            >
               <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-              <span className="relative z-10">Comenzar Proyecto</span>
+              <span className="relative z-10">Comenzar proyecto</span>
               <ArrowRight className="h-4 w-4 ml-2 relative z-10 transition-transform group-hover:translate-x-1" />
             </Button>
           </div>
         </section>
       </main>
 
-      {/* Footer */}
-      <footer className="border-t border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 w-full relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-between gap-4 py-10 md:h-24 md:flex-row md:py-0">
-          <div className="flex items-center space-x-2 group">
-            <div className="relative">
-              <Image 
-                src="/creativv-lg.png" 
-                alt="Creativv" 
-                width={32} 
-                height={32}
-                className="rounded-lg transition-transform group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-lg blur opacity-0 group-hover:opacity-100 transition-opacity"></div>
-            </div>
-            <span className="text-lg font-bold gradient-text">Creativv</span>
-          </div>
-          <div className="text-center text-sm leading-loose text-muted-foreground md:text-left">
-            © 2024 Creativv. Todos los derechos reservados.
-          </div>
-          <div className="flex gap-6">
-            <Link href="/" className="text-sm font-medium hover:text-primary transition-colors duration-300 hover:underline underline-offset-4">inicio</Link>
-            <Link href="/servicios" className="text-sm font-medium hover:text-primary transition-colors duration-300 hover:underline underline-offset-4">servicios</Link>
-            <Link href="/contacto" className="text-sm font-medium hover:text-primary transition-colors duration-300 hover:underline underline-offset-4">contacto</Link>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }

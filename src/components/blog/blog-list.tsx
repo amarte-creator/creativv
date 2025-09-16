@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Filter, Grid, List } from "lucide-react";
 
-import { blogPosts } from "@/lib/blog-data";
+import { blogPosts } from "@/lib/blog-data-updated";
 
 const categories = [
   "Todos",
@@ -22,11 +22,12 @@ export function BlogList() {
   const [searchQuery, setSearchQuery] = useState("");
 
   const filteredPosts = blogPosts.filter(post => {
+    const isVisible = !post.hidden;
     const matchesCategory = selectedCategory === "Todos" || post.category === selectedCategory;
     const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          post.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          post.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
-    return matchesCategory && matchesSearch;
+    return isVisible && matchesCategory && matchesSearch;
   });
 
   const featuredPosts = filteredPosts.filter(post => post.featured);
