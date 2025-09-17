@@ -23,7 +23,7 @@ export function Footer() {
         <div className="flex gap-6">
           <Link href="/terminos" className="text-sm font-medium hover:underline underline-offset-4">Términos</Link>
           <Link href="/privacidad" className="text-sm font-medium hover:underline underline-offset-4">Privacidad</Link>
-          <a href="mailto:hola@servicioscreativos.online" className="text-sm font-medium hover:underline underline-offset-4">hola@servicioscreativos.online</a>
+          <a href="mailto:contacto@servicioscreativos.online" className="text-sm font-medium hover:underline underline-offset-4">contacto@servicioscreativos.online</a>
         </div>
       </div>
     </footer>

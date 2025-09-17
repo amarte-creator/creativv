@@ -2,8 +2,7 @@
 
 import * as React from 'react'
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { MessageCircle, X, Send, ChevronRight, BarChart2, Globe, Zap, CheckCircle, ChevronDown, Brain, Code, TrendingUp, Users, Clock, Target, Award, Search, Lightbulb, Rocket, Shield, ArrowRight, Sparkles, Star, Zap as ZapIcon, BarChart3, Settings, Monitor, Database, Cpu, Workflow, PieChart, LineChart, Activity } from 'lucide-react'
+import { ChevronRight, BarChart2, Globe, Zap, CheckCircle, ChevronDown, Brain, Code, TrendingUp, Users, Clock, Target, Award, Search, Lightbulb, Rocket, Shield, ArrowRight, Sparkles, Star, Zap as ZapIcon, BarChart3, Settings, Monitor, Database, Cpu, Workflow, PieChart, LineChart, Activity } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Header } from "@/components/header"
@@ -34,15 +33,42 @@ declare global {
 }
 
 export function LandingPageComponent() {
-  const [isChatOpen, setIsChatOpen] = React.useState(false)
-  const [messages, setMessages] = React.useState([
-    { text: "¡Hola! Soy tu asistente Creativv. ¿En qué puedo ayudarte a transformar tu negocio hoy?", isBot: true }
-  ])
-  const [inputMessage, setInputMessage] = React.useState("")
   const [darkMode, setDarkMode] = React.useState(false)
   const [mounted, setMounted] = React.useState(false)
-  const [isLoading, setIsLoading] = React.useState(false)
   const [unicornStudioMounted, setUnicornStudioMounted] = React.useState(false)
+  const [currentWordIndex, setCurrentWordIndex] = React.useState(0)
+  const [displayText, setDisplayText] = React.useState('')
+  const [isDeleting, setIsDeleting] = React.useState(false)
+
+  const words = ['resultados', 'experiencias', 'crecimiento', 'oportunidades', 'innovación']
+
+  // Typing animation effect
+  React.useEffect(() => {
+    const currentWord = words[currentWordIndex]
+    
+    const timeout = setTimeout(() => {
+      if (!isDeleting) {
+        // Typing
+        if (displayText.length < currentWord.length) {
+          setDisplayText(currentWord.slice(0, displayText.length + 1))
+        } else {
+          // Finished typing, wait then start deleting
+          setTimeout(() => setIsDeleting(true), 2000)
+        }
+      } else {
+        // Deleting
+        if (displayText.length > 0) {
+          setDisplayText(displayText.slice(0, -1))
+        } else {
+          // Finished deleting, move to next word
+          setIsDeleting(false)
+          setCurrentWordIndex((prev) => (prev + 1) % words.length)
+        }
+      }
+    }, isDeleting ? 100 : 150) // Faster typing, slower deleting
+
+    return () => clearTimeout(timeout)
+  }, [displayText, isDeleting, currentWordIndex, words])
 
   React.useEffect(() => {
     setMounted(true)
@@ -127,8 +153,6 @@ export function LandingPageComponent() {
     localStorage.setItem('darkMode', newMode.toString())
   }
 
-  const toggleChat = () => setIsChatOpen(!isChatOpen)
-
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId)
     if (element) {
@@ -141,54 +165,7 @@ export function LandingPageComponent() {
     }
   }
 
-  const sendMessage = async () => {
-    if (inputMessage.trim() === "" || isLoading) return
-    
-    const userMessage = inputMessage
-    setInputMessage("")
-    setIsLoading(true)
-    
-    // Add user message to chat
-    setMessages(prev => [...prev, { text: userMessage, isBot: false }])
-    
-    try {
-      // Prepare messages for API (excluding the initial greeting)
-      const apiMessages = messages
-        .filter(msg => !msg.isBot || msg.text !== "¡Hola! Soy tu asistente Creativv. ¿En qué puedo ayudarte a transformar tu negocio hoy?")
-        .map(msg => ({
-          role: msg.isBot ? 'assistant' : 'user',
-          content: msg.text
-        }))
-      
-      // Add current user message
-      apiMessages.push({ role: 'user', content: userMessage })
-      
-      const response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ messages: apiMessages }),
-      })
-      
-      if (!response.ok) {
-        throw new Error('Failed to get response')
-      }
-      
-      const data = await response.json()
-      
-      // Add bot response to chat
-      setMessages(prev => [...prev, { text: data.response, isBot: true }])
-    } catch (error) {
-      console.error('Chat error:', error)
-      setMessages(prev => [...prev, { 
-        text: "Lo siento, tuve un problema procesando tu mensaje. ¿Podrías intentarlo de nuevo o contactarnos directamente?", 
-        isBot: true 
-      }])
-    } finally {
-      setIsLoading(false)
-    }
-  }
+  
 
   const services = [
     {
@@ -407,16 +384,21 @@ export function LandingPageComponent() {
           <div className="absolute inset-0 bg-gradient-to-br from-primary/3 via-transparent to-secondary/3 animate-pulse opacity-40 z-10"></div>
           
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
-            <div className="flex flex-col items-center text-center space-y-8 animate-fade-up">
+            <div className="flex flex-col items-center text-center space-y-24 animate-fade-up">
           <h1 className="text-4xl font-extrabold tracking-tight leading-[1.1] sm:text-5xl md:text-6xl lg:text-7xl drop-shadow-[0_10px_30px_rgba(0,0,0,0.7)]">
             <div className="text-white/80 font-medium">Transformamos ideas</div>
             <div className="text-white/60 font-light text-3xl sm:text-4xl md:text-5xl lg:text-6xl italic">en</div>
-            <div className="text-white font-black drop-shadow-[0_10px_30px_rgba(0,0,0,0.7)]">impacto</div>
-            <div className="text-white font-black drop-shadow-[0_10px_30px_rgba(0,0,0,0.7)]">digital</div>
+            <div className="text-white/80 font-black drop-shadow-[0_10px_30px_rgba(0,0,0,0.7)] min-h-[1.2em]">
+              {displayText}
+              <span className="animate-pulse">|</span>
+            </div>
           </h1>
-              <p className="mx-auto max-w-3xl text-white/95 md:text-lg lg:text-xl leading-relaxed drop-shadow-[0_6px_24px_rgba(0,0,0,0.75)]">
-                Somos expertos en transformación digital que ayudamos a empresas a escalar con tecnología de vanguardia. Desde automatizaciones con IA hasta desarrollo web, convertimos tus desafíos en oportunidades.
-              </p>
+              
+              <div className="flex-1 flex items-end justify-center pb-16">
+                <p className="mx-auto max-w-3xl text-white/95 md:text-lg lg:text-xl leading-relaxed drop-shadow-[0_6px_24px_rgba(0,0,0,0.75)] animate-fade-up animate-delay-150">
+                  Somos expertos en transformación digital que ayudamos a empresas a escalar con tecnología de vanguardia. Desde automatizaciones con IA hasta desarrollo web, convertimos tus desafíos en oportunidades.
+                </p>
+              </div>
             </div>
           </div>
 
@@ -785,59 +767,6 @@ export function LandingPageComponent() {
       </main>
 
       <Footer />
-
-      {/* Chatbot */}
-      <div className={`fixed bottom-4 right-4 z-50 ${isChatOpen ? 'w-80' : 'w-auto'} transition-all duration-300`}>
-        {isChatOpen ? (
-          <div className="glass rounded-xl shadow-2xl overflow-hidden animate-fade-up">
-            <div className="bg-primary text-primary-foreground p-4 flex justify-between items-center">
-              <h3 className="font-semibold">Asistente Creativv</h3>
-              <Button variant="ghost" size="icon" onClick={toggleChat}>
-                <X className="h-5 w-5" />
-              </Button>
-            </div>
-            <div className="h-80 overflow-y-auto p-4 space-y-4">
-              {messages.map((msg, index) => (
-                <div key={index} className={`flex ${msg.isBot ? 'justify-start' : 'justify-end'}`}>
-                  <div className={`rounded-lg p-3 max-w-[80%] ${msg.isBot ? 'bg-muted' : 'bg-primary text-primary-foreground'} animate-fade-in`}>
-                    {msg.text}
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="p-4 border-t border-border/40">
-              <div className="flex space-x-2 mb-3">
-                <Input
-                  value={inputMessage}
-                  onChange={(e) => setInputMessage(e.target.value)}
-                  placeholder="Escribe tu mensaje..."
-                  onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
-                  className="flex-1"
-                  disabled={isLoading}
-                />
-                <Button onClick={sendMessage} size="icon" disabled={isLoading}>
-                  {isLoading ? (
-                    <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
-                  ) : (
-                    <Send className="h-4 w-4" />
-                  )}
-                </Button>
-              </div>
-              <Button 
-                onClick={() => window.open(process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://calendly.com/avilamolinaadrian/30min', '_blank')}
-                className="w-full btn-primary text-sm"
-                size="sm"
-              >
-                📅 Agenda tu consulta gratuita
-              </Button>
-            </div>
-          </div>
-        ) : (
-          <Button onClick={toggleChat} size="icon" className="rounded-full w-14 h-14 btn-primary animate-bounce">
-            <MessageCircle className="h-6 w-6" />
-          </Button>
-        )}
-      </div>
     </div>
   )
 }

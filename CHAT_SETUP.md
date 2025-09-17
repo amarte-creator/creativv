@@ -26,7 +26,7 @@ OPENROUTER_API_KEY=sk-or-v1-837392ab687452737e48d0541bbbb7447ea4d806b984fd615b24
 If you have a different Calendly booking link, update it in the `.env.local` file:
 
 ```env
-NEXT_PUBLIC_CALENDLY_URL=https://calendly.com/avilamolinaadrian/30min
+NEXT_PUBLIC_CALENDLY_URL=https://calendly.com/contacto-servicioscreativos/30min
 ```
 
 ### 4. Restart Development Server

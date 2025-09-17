@@ -42,7 +42,7 @@ export async function POST(request: NextRequest) {
     }
 
     const completion = await openai.chat.completions.create({
-      model: 'deepseek/deepseek-chat-v3.1:free',
+      model: 'meta-llama/llama-3.2-3b-instruct:free',
       messages: [
         { role: 'system', content: SYSTEM_PROMPT },
         ...messages

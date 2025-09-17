@@ -107,7 +107,7 @@ El sitio está optimizado para:
 ## 📞 Contacto
 
 Para más información sobre Creativv:
-- **Email**: [email@creativv.com]
+- **Email**: [contacto@servicioscreativos.online]
 - **Website**: [creativv.com]
 - **LinkedIn**: [linkedin.com/company/creativv]
 
