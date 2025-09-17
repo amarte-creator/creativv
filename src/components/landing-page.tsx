@@ -317,9 +317,9 @@ export function LandingPageComponent() {
     const traverse = (node: Node) => {
       if (node instanceof Element) {
         hideOrRemove(node)
-        const anyNode = node as any
-        if (anyNode.shadowRoot) {
-          traverse(anyNode.shadowRoot as unknown as Node)
+        const elementNode = node as Element & { shadowRoot?: ShadowRoot }
+        if (elementNode.shadowRoot) {
+          traverse(elementNode.shadowRoot as unknown as Node)
         }
       }
       node.childNodes.forEach(traverse)
@@ -331,7 +331,7 @@ export function LandingPageComponent() {
   // Attach mutation observers to all discovered shadow roots so late-added badges get caught
   const observeAllShadowRoots = () => {
     const attachForNode = (node: Node) => {
-      const el = node as any
+      const el = node as Element & { shadowRoot?: ShadowRoot; __usObserved?: boolean }
       if (el && el.shadowRoot && el.__usObserved !== true) {
         try {
           const shadowObserver = new MutationObserver(() => {
@@ -701,7 +701,7 @@ export function LandingPageComponent() {
                           title: "Soporte Continuo",
                           description: "Estamos contigo antes, durante y después del proyecto"
                         }
-                      ].map((benefit, index) => (
+                      ].map((benefit) => (
                         <div key={benefit.title} className="flex items-start space-x-4">
                           <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center flex-shrink-0">
                             <div className="text-primary">
