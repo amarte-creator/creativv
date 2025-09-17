@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { BlogCard } from "./blog-card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Filter, Grid, List } from "lucide-react";
 
 import { blogPosts } from "@/lib/blog-data-updated";
@@ -19,7 +18,7 @@ const categories = [
 export function BlogList() {
   const [selectedCategory, setSelectedCategory] = useState("Todos");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery] = useState("");
 
   const filteredPosts = blogPosts.filter(post => {
     const isVisible = !post.hidden;

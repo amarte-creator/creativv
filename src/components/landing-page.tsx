@@ -2,25 +2,9 @@
 
 import * as React from 'react'
 import { Button } from "@/components/ui/button"
-import { ChevronRight, BarChart2, Globe, Zap, CheckCircle, ChevronDown, Brain, Code, TrendingUp, Users, Clock, Target, Award, Search, Lightbulb, Rocket, Shield, ArrowRight, Sparkles, Star, Zap as ZapIcon, BarChart3, Settings, Monitor, Database, Cpu, Workflow, PieChart, LineChart, Activity } from 'lucide-react'
-import Image from 'next/image'
+import { ChevronRight, BarChart2, CheckCircle, Brain, Code, TrendingUp, Users, Clock, Target, Award, Search, Rocket, Shield, Sparkles, Star } from 'lucide-react'
 import Link from 'next/link'
 import { Header } from "@/components/header"
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion"
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet"
-import { Switch } from "@/components/ui/switch"
 import { Footer } from "@/components/footer"
 
 declare global {
@@ -40,10 +24,9 @@ export function LandingPageComponent() {
   const [displayText, setDisplayText] = React.useState('')
   const [isDeleting, setIsDeleting] = React.useState(false)
 
-  const words = ['resultados', 'experiencias', 'crecimiento', 'oportunidades', 'innovación']
-
   // Typing animation effect
   React.useEffect(() => {
+    const words = ['resultados', 'experiencias', 'crecimiento', 'oportunidades', 'innovación']
     const currentWord = words[currentWordIndex]
     
     const timeout = setTimeout(() => {
@@ -68,149 +51,10 @@ export function LandingPageComponent() {
     }, isDeleting ? 100 : 150) // Faster typing, slower deleting
 
     return () => clearTimeout(timeout)
-  }, [displayText, isDeleting, currentWordIndex, words])
-
-  React.useEffect(() => {
-    setMounted(true)
-    const savedMode = localStorage.getItem('darkMode')
-    if (savedMode !== null) {
-      setDarkMode(savedMode === 'true')
-    }
-    
-    // Set UnicornStudio mounted after component mounts
-    setUnicornStudioMounted(true)
-    
-    // Load UnicornStudio script
-    if (typeof window !== 'undefined' && !window.UnicornStudio) {
-      window.UnicornStudio = { isInitialized: false }
-      
-      const script = document.createElement('script')
-      script.src = 'https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.4.30/dist/unicornStudio.umd.js'
-      script.onload = function() {
-        console.log('UnicornStudio script loaded')
-        const us = window.UnicornStudio ?? { isInitialized: false }
-        window.UnicornStudio = us
-        if (!us.isInitialized) {
-          us.init?.()
-          us.isInitialized = true
-          console.log('UnicornStudio initialized')
-          
-          // Hide badges after initialization
-          setTimeout(() => {
-            hideUnicornStudioBadges()
-          }, 1000)
-          
-          // Run badge hiding periodically
-          setTimeout(() => {
-            hideUnicornStudioBadges()
-          }, 3000)
-          
-          setTimeout(() => {
-            hideUnicornStudioBadges()
-          }, 5000)
-        }
-      }
-      document.head.appendChild(script)
-    }
-  }, [])
-
-  React.useEffect(() => {
-    // Apply the dark mode class to document only after mounting
-    if (mounted) {
-      if (darkMode) {
-        document.documentElement.classList.add('dark')
-      } else {
-        document.documentElement.classList.remove('dark')
-      }
-    }
-  }, [darkMode, mounted])
-
-  // Observe DOM changes to remove UnicornStudio badges dynamically (including shadow DOM)
-  React.useEffect(() => {
-    if (!mounted) return
-
-    const observedShadowRoots = new WeakSet<Node>()
-
-    const handle = () => {
-      hideUnicornStudioBadgesDeep()
-      observeAllShadowRoots()
-    }
-
-    const observer = new MutationObserver(() => {
-      handle()
-    })
-    observer.observe(document.body, { childList: true, subtree: true, attributes: true })
-
-    // Initial sweep
-    handle()
-
-    return () => observer.disconnect()
-  }, [mounted])
-
-  const handleToggleDarkMode = () => {
-    const newMode = !darkMode
-    setDarkMode(newMode)
-    localStorage.setItem('darkMode', newMode.toString())
-  }
-
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId)
-    if (element) {
-      const headerHeight = 64 // Height of the fixed header (16 * 4 = 64px)
-      const elementPosition = element.offsetTop - headerHeight
-      window.scrollTo({
-        top: elementPosition,
-        behavior: 'smooth'
-      })
-    }
-  }
-
-  
-
-  const services = [
-    {
-      title: "Automatizaciones con IA y n8n",
-      icon: <Brain className="h-12 w-12 mb-4 text-primary" />,
-      description: "Automatiza procesos complejos con inteligencia artificial y n8n",
-      benefits: [
-        "Reducción del 80% en tareas repetitivas",
-        "Integración con más de 200 aplicaciones",
-        "Flujos de trabajo inteligentes con IA"
-      ],
-      slug: "automatizaciones"
-    },
-    {
-      title: "Desarrollo BI (Business Intelligence)",
-      icon: <BarChart2 className="h-12 w-12 mb-4 text-primary" />,
-      description: "Transforma datos en decisiones estratégicas con dashboards inteligentes",
-      benefits: [
-        "Dashboards interactivos personalizados",
-        "Análisis predictivo con IA",
-        "Reportes automatizados en tiempo real"
-      ],
-      slug: "business-intelligence"
-    },
-    {
-      title: "Desarrollo Web",
-      icon: <Code className="h-12 w-12 mb-4 text-primary" />,
-      description: "Creamos sitios web modernos que convierten visitantes en clientes",
-      benefits: [
-        "Diseño UX/UI de vanguardia",
-        "Optimización para conversiones",
-        "Integración con sistemas empresariales"
-      ],
-      slug: "desarrollo-web"
-    }
-  ]
-
-
-
-  const handleCTA = () => {
-    window.open(process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://calendly.com/avilamolinaadrian/30min', '_blank')
-  }
+  }, [displayText, isDeleting, currentWordIndex])
 
   // Function to hide UnicornStudio badges
-  const hideUnicornStudioBadges = () => {
+  const hideUnicornStudioBadges = React.useCallback(() => {
     // Hide elements by position and content
     const allDivs = document.querySelectorAll('div')
     const allLinks = document.querySelectorAll('a')
@@ -258,10 +102,10 @@ export function LandingPageComponent() {
         element.style.display = 'none'
       }
     })
-  }
+  }, [])
 
   // Deep removal: traverse regular DOM and shadow DOM to hide/remove badges
-  const hideUnicornStudioBadgesDeep = () => {
+  const hideUnicornStudioBadgesDeep = React.useCallback(() => {
     const isBadgeAnchor = (el: Element): boolean => {
       const href = (el as HTMLAnchorElement).getAttribute?.('href') || ''
       const style = el.getAttribute?.('style') || ''
@@ -326,10 +170,10 @@ export function LandingPageComponent() {
     }
 
     traverse(document.body)
-  }
+  }, [])
 
   // Attach mutation observers to all discovered shadow roots so late-added badges get caught
-  const observeAllShadowRoots = () => {
+  const observeAllShadowRoots = React.useCallback(() => {
     const attachForNode = (node: Node) => {
       const el = node as Element & { shadowRoot?: ShadowRoot; __usObserved?: boolean }
       if (el && el.shadowRoot && el.__usObserved !== true) {
@@ -344,7 +188,144 @@ export function LandingPageComponent() {
       node.childNodes.forEach(attachForNode)
     }
     attachForNode(document.body)
+  }, [hideUnicornStudioBadgesDeep])
+
+  React.useEffect(() => {
+    setMounted(true)
+    const savedMode = localStorage.getItem('darkMode')
+    if (savedMode !== null) {
+      setDarkMode(savedMode === 'true')
+    }
+    
+    // Set UnicornStudio mounted after component mounts
+    setUnicornStudioMounted(true)
+    
+    // Load UnicornStudio script
+    if (typeof window !== 'undefined' && !window.UnicornStudio) {
+      window.UnicornStudio = { isInitialized: false }
+      
+      const script = document.createElement('script')
+      script.src = 'https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.4.30/dist/unicornStudio.umd.js'
+      script.onload = function() {
+        console.log('UnicornStudio script loaded')
+        const us = window.UnicornStudio ?? { isInitialized: false }
+        window.UnicornStudio = us
+        if (!us.isInitialized) {
+          us.init?.()
+          us.isInitialized = true
+          console.log('UnicornStudio initialized')
+          
+          // Hide badges after initialization
+          setTimeout(() => {
+            hideUnicornStudioBadges()
+          }, 1000)
+          
+          // Run badge hiding periodically
+          setTimeout(() => {
+            hideUnicornStudioBadges()
+          }, 3000)
+          
+          setTimeout(() => {
+            hideUnicornStudioBadges()
+          }, 5000)
+        }
+      }
+      document.head.appendChild(script)
+    }
+  }, [hideUnicornStudioBadges])
+
+  React.useEffect(() => {
+    // Apply the dark mode class to document only after mounting
+    if (mounted) {
+      if (darkMode) {
+        document.documentElement.classList.add('dark')
+      } else {
+        document.documentElement.classList.remove('dark')
+      }
+    }
+  }, [darkMode, mounted])
+
+  const handleToggleDarkMode = () => {
+    const newMode = !darkMode
+    setDarkMode(newMode)
+    localStorage.setItem('darkMode', newMode.toString())
   }
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId)
+    if (element) {
+      const headerHeight = 64 // Height of the fixed header (16 * 4 = 64px)
+      const elementPosition = element.offsetTop - headerHeight
+      window.scrollTo({
+        top: elementPosition,
+        behavior: 'smooth'
+      })
+    }
+  }
+
+  
+
+  const services = [
+    {
+      title: "Automatizaciones con IA y n8n",
+      icon: <Brain className="h-12 w-12 mb-4 text-primary" />,
+      description: "Automatiza procesos complejos con inteligencia artificial y n8n",
+      benefits: [
+        "Reducción del 80% en tareas repetitivas",
+        "Integración con más de 200 aplicaciones",
+        "Flujos de trabajo inteligentes con IA"
+      ],
+      slug: "automatizaciones"
+    },
+    {
+      title: "Desarrollo BI (Business Intelligence)",
+      icon: <BarChart2 className="h-12 w-12 mb-4 text-primary" />,
+      description: "Transforma datos en decisiones estratégicas con dashboards inteligentes",
+      benefits: [
+        "Dashboards interactivos personalizados",
+        "Análisis predictivo con IA",
+        "Reportes automatizados en tiempo real"
+      ],
+      slug: "business-intelligence"
+    },
+    {
+      title: "Desarrollo Web",
+      icon: <Code className="h-12 w-12 mb-4 text-primary" />,
+      description: "Creamos sitios web modernos que convierten visitantes en clientes",
+      benefits: [
+        "Diseño UX/UI de vanguardia",
+        "Optimización para conversiones",
+        "Integración con sistemas empresariales"
+      ],
+      slug: "desarrollo-web"
+    }
+  ]
+
+
+
+  const handleCTA = () => {
+    window.open(process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://calendly.com/avilamolinaadrian/30min', '_blank')
+  }
+
+  // Observe DOM changes to remove UnicornStudio badges dynamically (including shadow DOM)
+  React.useEffect(() => {
+    if (!mounted) return
+
+    const handle = () => {
+      hideUnicornStudioBadgesDeep()
+      observeAllShadowRoots()
+    }
+
+    const observer = new MutationObserver(() => {
+      handle()
+    })
+    observer.observe(document.body, { childList: true, subtree: true, attributes: true })
+
+    // Initial sweep
+    handle()
+
+    return () => observer.disconnect()
+  }, [mounted, hideUnicornStudioBadgesDeep, observeAllShadowRoots])
 
   return (
     <div className={`min-h-screen flex flex-col w-full ${mounted && darkMode ? 'dark' : ''}`}>

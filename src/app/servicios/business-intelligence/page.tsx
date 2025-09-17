@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import { Button } from "@/components/ui/button"
-import { BarChart2, TrendingUp, CheckCircle, ArrowLeft, Users, Clock, Database, BarChart3, Cpu, Sun, Moon, PieChart, LineChart, Activity } from 'lucide-react'
+import { BarChart2, TrendingUp, CheckCircle, ArrowLeft, Database, BarChart3, Sun, Moon, PieChart, Activity } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Footer } from '@/components/footer'

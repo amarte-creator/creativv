@@ -19,7 +19,7 @@ interface BlogPostData {
   featured: boolean;
   tags: string[];
   image: string;
-  content: string;
+  content?: string;
 }
 
 interface BlogPostProps {
@@ -161,7 +161,7 @@ export function BlogPost({ post }: BlogPostProps) {
 
       {/* Content */}
       <div className="prose prose-lg max-w-none dark:prose-invert prose-headings:text-gray-900 dark:prose-headings:text-white prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-strong:text-gray-900 dark:prose-strong:text-white prose-ul:text-gray-700 dark:prose-ul:text-gray-300 prose-li:text-gray-700 dark:prose-li:text-gray-300">
-        <div dangerouslySetInnerHTML={{ __html: post.content }} />
+        <div dangerouslySetInnerHTML={{ __html: post.content || '' }} />
       </div>
 
       {/* Author Bio */}
