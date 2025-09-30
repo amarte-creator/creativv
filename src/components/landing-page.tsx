@@ -6,6 +6,8 @@ import { ChevronRight, BarChart2, CheckCircle, Brain, Code, TrendingUp, Users, C
 import Link from 'next/link'
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
+import { Testimonials } from "@/components/testimonials"
+import { FAQ, generalFAQs } from "@/components/faq"
 
 declare global {
   interface Window {
@@ -337,7 +339,7 @@ export function LandingPageComponent() {
 
       <main className="flex-grow w-full">
         {/* Hero Section */}
-        <section id="inicio" className="py-24 relative overflow-hidden w-full min-h-screen flex items-center">
+        <section id="inicio" className="py-24 relative overflow-hidden w-full h-[80vh] flex items-center">
           {/* UnicornStudio Background - Only render on client side */}
           {unicornStudioMounted && (
             <div className="absolute inset-0 w-full h-full">
@@ -367,7 +369,7 @@ export function LandingPageComponent() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
             <div className="flex flex-col items-center text-center space-y-24 animate-fade-up">
           <h1 className="text-4xl font-extrabold tracking-tight leading-[1.1] sm:text-5xl md:text-6xl lg:text-7xl drop-shadow-[0_10px_30px_rgba(0,0,0,0.7)]">
-            <div className="text-white/80 font-medium">Transformamos ideas</div>
+            <div className="text-white/80 font-medium">Transformamos problemas</div>
             <div className="text-white/60 font-light text-3xl sm:text-4xl md:text-5xl lg:text-6xl italic">en</div>
             <div className="text-white/80 font-black drop-shadow-[0_10px_30px_rgba(0,0,0,0.7)] min-h-[1.2em]">
               {displayText}
@@ -392,6 +394,30 @@ export function LandingPageComponent() {
             >
               Agenda una consulta gratuita <ChevronRight className="ml-2 h-5 w-5" />
             </Button>
+          </div>
+        </section>
+
+        {/* Trust Badges */}
+        <section className="py-12 border-y border-border/40 bg-muted/30 w-full">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+              <div className="space-y-2">
+                <div className="text-3xl font-bold text-primary">50+</div>
+                <div className="text-sm text-muted-foreground">Proyectos Completados</div>
+              </div>
+              <div className="space-y-2">
+                <div className="text-3xl font-bold text-primary">98%</div>
+                <div className="text-sm text-muted-foreground">Satisfacción del Cliente</div>
+              </div>
+              <div className="space-y-2">
+                <div className="text-3xl font-bold text-primary">4.9/5</div>
+                <div className="text-sm text-muted-foreground">Calificación Promedio</div>
+              </div>
+              <div className="space-y-2">
+                <div className="text-3xl font-bold text-primary">24h</div>
+                <div className="text-sm text-muted-foreground">Tiempo de Respuesta</div>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -436,25 +462,33 @@ export function LandingPageComponent() {
                     </div>
                   </div>
                 </div>
+                <div className="flex gap-4 pt-4">
+                  <Button asChild className="btn-primary">
+                    <Link href="/nosotros">Conocer más</Link>
+                  </Button>
+                  <Button asChild variant="outline">
+                    <Link href="/casos-exito">Ver casos de éxito</Link>
+                  </Button>
+                </div>
               </div>
               <div className="relative">
                 <div className="glass rounded-2xl p-8 animate-fade-up animate-delay-300">
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <div className="text-2xl font-bold text-primary">50+</div>
-                      <div className="text-sm text-muted-foreground">Proyectos completados</div>
-                    </div>
-                    <div className="space-y-2">
-                      <div className="text-2xl font-bold text-primary">95%</div>
-                      <div className="text-sm text-muted-foreground">Satisfacción del cliente</div>
+                      <div className="text-2xl font-bold text-primary">300%</div>
+                      <div className="text-sm text-muted-foreground">ROI Promedio</div>
                     </div>
                     <div className="space-y-2">
                       <div className="text-2xl font-bold text-primary">3x</div>
                       <div className="text-sm text-muted-foreground">Mejora en eficiencia</div>
                     </div>
                     <div className="space-y-2">
-                      <div className="text-2xl font-bold text-primary">24/7</div>
-                      <div className="text-sm text-muted-foreground">Soporte disponible</div>
+                      <div className="text-2xl font-bold text-primary">80%</div>
+                      <div className="text-sm text-muted-foreground">Tiempo ahorrado</div>
+                    </div>
+                    <div className="space-y-2">
+                      <div className="text-2xl font-bold text-primary">2-4</div>
+                      <div className="text-sm text-muted-foreground">Semanas a ROI</div>
                     </div>
                   </div>
                 </div>
@@ -726,23 +760,121 @@ export function LandingPageComponent() {
           </div>
         </section>
 
+        {/* Testimonials Section */}
+        <section className="py-24 w-full bg-muted/30">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium mb-6 animate-fade-up">
+                <Star className="h-4 w-4 fill-primary" />
+                Testimonios Reales
+              </div>
+              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl mb-6 animate-fade-up animate-delay-150">
+                Lo que dicen nuestros clientes
+              </h2>
+              <p className="mx-auto max-w-[700px] text-lg text-muted-foreground animate-fade-up animate-delay-300">
+                No confíes solo en nuestra palabra. Descubre cómo hemos ayudado a empresas como la tuya.
+              </p>
+            </div>
+
+            <Testimonials limit={3} />
+
+            <div className="mt-12 text-center">
+              <Button asChild variant="outline" size="lg">
+                <Link href="/casos-exito">
+                  Ver más casos de éxito <ChevronRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </section>
+
+        {/* Resources CTA */}
+        <section className="py-20 w-full relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-secondary/5 to-transparent"></div>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="glass rounded-2xl p-12 text-center">
+              <h2 className="text-3xl font-bold mb-4">
+                Empieza gratis con nuestros recursos
+              </h2>
+              <p className="text-muted-foreground mb-8 max-w-[600px] mx-auto">
+                Descarga guías, templates de n8n, calculadora de ROI y más herramientas gratuitas 
+                para comenzar tu transformación digital hoy mismo.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button asChild size="lg" className="btn-primary">
+                  <Link href="/recursos">
+                    Ver recursos gratuitos <ChevronRight className="ml-2 h-5 w-5" />
+                  </Link>
+                </Button>
+                <Button asChild size="lg" variant="outline">
+                  <Link href="/recursos/calculadora-roi">
+                    Calcular mi ROI
+                  </Link>
+                </Button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section className="py-24 w-full bg-muted/30">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <FAQ 
+              items={generalFAQs}
+              title="Preguntas Frecuentes"
+              subtitle="Todo lo que necesitas saber sobre trabajar con Creativv"
+            />
+            <div className="mt-12 text-center">
+              <p className="text-muted-foreground mb-4">
+                ¿Tienes más preguntas?
+              </p>
+              <Button onClick={handleCTA} variant="outline" size="lg">
+                Agenda una llamada de 30 minutos
+              </Button>
+            </div>
+          </div>
+        </section>
+
         {/* CTA Final */}
         <section id="contacto" className="py-20 w-full">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div className="inline-flex items-center gap-2 bg-gradient-to-r from-primary/10 to-secondary/10 text-primary px-6 py-3 rounded-full text-sm font-medium mb-6 animate-fade-up">
               <Users className="h-4 w-4" />
-              Experiencia Garantizada
+              Únete a 50+ Empresas Exitosas
             </div>
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl mb-6 animate-fade-up animate-delay-150">
               ¿Listo para transformar tu negocio?
             </h2>
             <p className="mx-auto max-w-[600px] text-lg text-muted-foreground mb-8 animate-fade-up animate-delay-300">
-              Únete a cientos de empresas que ya están escalando con tecnología de vanguardia. 
-              Tu transformación digital comienza aquí con nuestra metodología probada.
+              Agenda una consulta gratuita de 30 minutos. Sin presión de ventas, solo una conversación 
+              honesta sobre cómo podemos ayudarte a crecer.
             </p>
-            <Button size="lg" className="btn-primary text-lg px-8 py-6 animate-fade-up animate-delay-450" onClick={handleCTA}>
-              Comienza tu experiencia <ChevronRight className="ml-2 h-5 w-5" />
-            </Button>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-up animate-delay-450">
+              <Button size="lg" className="btn-primary text-lg px-8 py-6" onClick={handleCTA}>
+                Agendar Consulta Gratuita <ChevronRight className="ml-2 h-5 w-5" />
+              </Button>
+              <Button size="lg" variant="outline" className="text-lg px-8 py-6" asChild>
+                <Link href="/nosotros">
+                  Conocer más sobre nosotros
+                </Link>
+              </Button>
+            </div>
+            
+            {/* Trust indicators */}
+            <div className="mt-12 flex flex-wrap justify-center gap-8 text-sm text-muted-foreground">
+              <div className="flex items-center gap-2">
+                <CheckCircle className="h-4 w-4 text-primary" />
+                <span>Sin compromiso</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle className="h-4 w-4 text-primary" />
+                <span>Respuesta en 24h</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle className="h-4 w-4 text-primary" />
+                <span>ROI garantizado</span>
+              </div>
+            </div>
           </div>
         </section>
       </main>

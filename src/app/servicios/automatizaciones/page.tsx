@@ -6,6 +6,8 @@ import { Brain, Zap, CheckCircle, ArrowLeft, Users, TrendingUp, BarChart3, Cpu, 
 import Link from 'next/link'
 import Image from 'next/image'
 import { Footer } from '@/components/footer'
+import { FAQ, automationFAQs, pricingFAQs } from '@/components/faq'
+import { Testimonials } from '@/components/testimonials'
 
 export default function AutomatizacionesPage() {
   const [darkMode, setDarkMode] = React.useState(false)
@@ -258,6 +260,189 @@ export default function AutomatizacionesPage() {
           </div>
         </section>
 
+        {/* Pricing */}
+        <section className="py-20 w-full">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl mb-6">
+                Inversión y Precios
+              </h2>
+              <p className="mx-auto max-w-[700px] text-lg text-muted-foreground">
+                Transparencia total. Sin costos ocultos, sin sorpresas.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {/* Starter */}
+              <div className="glass rounded-xl p-8">
+                <div className="text-sm font-medium text-primary mb-2">Starter</div>
+                <div className="text-4xl font-bold mb-2">$15,000 - $30,000</div>
+                <div className="text-sm text-muted-foreground mb-6">MXN · Pago único</div>
+                <ul className="space-y-3 mb-8">
+                  <li className="flex items-start gap-2">
+                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-sm">1-2 automatizaciones simples</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-sm">Hasta 5 integraciones</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-sm">Capacitación básica</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-sm">1 mes de soporte incluido</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-sm">Documentación completa</span>
+                  </li>
+                </ul>
+                <Button 
+                  variant="outline" 
+                  className="w-full"
+                  onClick={() => window.open(process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://calendly.com/avilamolinaadrian/30min', '_blank')}
+                >
+                  Consulta Gratis
+                </Button>
+              </div>
+
+              {/* Professional */}
+              <div className="glass rounded-xl p-8 border-2 border-primary relative overflow-hidden">
+                <div className="absolute top-4 right-4 bg-primary text-primary-foreground px-3 py-1 rounded-full text-xs font-medium">
+                  Más Popular
+                </div>
+                <div className="text-sm font-medium text-primary mb-2">Professional</div>
+                <div className="text-4xl font-bold mb-2">$40,000 - $80,000</div>
+                <div className="text-sm text-muted-foreground mb-6">MXN · Pago único</div>
+                <ul className="space-y-3 mb-8">
+                  <li className="flex items-start gap-2">
+                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-sm">3-5 automatizaciones complejas</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-sm">Integraciones ilimitadas</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-sm">Integración con IA (GPT, Claude)</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-sm">Capacitación avanzada</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-sm">3 meses de soporte incluido</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-sm">Dashboard de métricas</span>
+                  </li>
+                </ul>
+                <Button 
+                  className="w-full btn-primary"
+                  onClick={() => window.open(process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://calendly.com/avilamolinaadrian/30min', '_blank')}
+                >
+                  Agendar Llamada
+                </Button>
+              </div>
+
+              {/* Enterprise */}
+              <div className="glass rounded-xl p-8">
+                <div className="text-sm font-medium text-primary mb-2">Enterprise</div>
+                <div className="text-4xl font-bold mb-2">$100,000+</div>
+                <div className="text-sm text-muted-foreground mb-6">MXN · Personalizado</div>
+                <ul className="space-y-3 mb-8">
+                  <li className="flex items-start gap-2">
+                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-sm">Ecosistema completo</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-sm">Automatizaciones ilimitadas</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-sm">IA personalizada y fine-tuning</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-sm">SLA garantizado</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-sm">Soporte prioritario 24/7</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-sm">Equipo dedicado</span>
+                  </li>
+                </ul>
+                <Button 
+                  variant="outline" 
+                  className="w-full"
+                  onClick={() => window.open(process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://calendly.com/avilamolinaadrian/30min', '_blank')}
+                >
+                  Contactar
+                </Button>
+              </div>
+            </div>
+
+            <div className="mt-12 glass rounded-xl p-6 max-w-3xl mx-auto">
+              <p className="text-sm text-muted-foreground text-center mb-4">
+                <strong className="text-foreground">💡 Nota importante:</strong> Todos los precios incluyen desarrollo, integración, 
+                pruebas, capacitación y primer mes de soporte. Aceptamos pagos en parcialidades para proyectos +$50,000.
+              </p>
+              <div className="flex flex-wrap justify-center gap-6 text-sm">
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="h-4 w-4 text-primary" />
+                  <span>Sin costos ocultos</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="h-4 w-4 text-primary" />
+                  <span>Garantía de satisfacción</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="h-4 w-4 text-primary" />
+                  <span>ROI medible</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Testimonials */}
+        <section className="py-20 bg-muted/30 w-full">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold mb-4">
+                Clientes que ya automatizaron su negocio
+              </h2>
+            </div>
+            <Testimonials limit={3} />
+          </div>
+        </section>
+
+        {/* FAQ */}
+        <section className="py-20 w-full">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <FAQ 
+              items={automationFAQs}
+              title="Preguntas Frecuentes sobre Automatización"
+              subtitle="Todo lo que necesitas saber antes de automatizar"
+            />
+            
+            <div className="mt-16">
+              <h3 className="text-2xl font-bold text-center mb-8">Preguntas sobre Precios</h3>
+              <FAQ items={pricingFAQs} />
+            </div>
+          </div>
+        </section>
+
         {/* CTA */}
         <section className="py-20 bg-muted/30 w-full">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -265,15 +450,28 @@ export default function AutomatizacionesPage() {
               ¿Listo para automatizar tu negocio?
             </h2>
             <p className="mx-auto max-w-[600px] text-lg text-muted-foreground mb-8 animate-fade-up animate-delay-150">
-              Agenda una consulta gratuita y descubre cómo podemos transformar tus procesos con IA
+              Agenda una consulta gratuita de 30 minutos. Analizaremos tus procesos y te mostraremos 
+              exactamente cuánto tiempo y dinero puedes ahorrar.
             </p>
-            <Button 
-              size="lg" 
-              className="btn-primary text-lg px-8 py-6 animate-fade-up animate-delay-300"
-              onClick={() => window.open(process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://calendly.com/avilamolinaadrian/30min', '_blank')}
-            >
-              Comenzar ahora
-            </Button>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button 
+                size="lg" 
+                className="btn-primary text-lg px-8 py-6 animate-fade-up animate-delay-300"
+                onClick={() => window.open(process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://calendly.com/avilamolinaadrian/30min', '_blank')}
+              >
+                Agendar Consulta Gratuita
+              </Button>
+              <Button 
+                size="lg" 
+                variant="outline"
+                className="text-lg px-8 py-6"
+                asChild
+              >
+                <Link href="/recursos/calculadora-roi">
+                  Calcular mi ROI
+                </Link>
+              </Button>
+            </div>
           </div>
         </section>
       </main>

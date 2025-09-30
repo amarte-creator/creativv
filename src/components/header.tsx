@@ -38,6 +38,16 @@ export function Header({ darkMode, onToggleDarkMode, scrollToSection }: HeaderPr
                 <Button variant="ghost" onClick={() => scrollToSection('servicios')} className="capitalize font-medium">
                   servicios
                 </Button>
+                <Link href="/casos-exito">
+                  <Button variant="ghost" className="capitalize font-medium">
+                    casos de éxito
+                  </Button>
+                </Link>
+                <Link href="/recursos">
+                  <Button variant="ghost" className="capitalize font-medium">
+                    recursos
+                  </Button>
+                </Link>
                 <Link href="/blog">
                   <Button variant="ghost" className="capitalize font-medium">
                     blog
@@ -52,6 +62,16 @@ export function Header({ darkMode, onToggleDarkMode, scrollToSection }: HeaderPr
                 <Button variant="ghost" asChild className="capitalize font-medium">
                   <Link href="/#servicios">servicios</Link>
                 </Button>
+                <Link href="/casos-exito">
+                  <Button variant="ghost" className="capitalize font-medium">
+                    casos de éxito
+                  </Button>
+                </Link>
+                <Link href="/recursos">
+                  <Button variant="ghost" className="capitalize font-medium">
+                    recursos
+                  </Button>
+                </Link>
                 <Link href="/blog">
                   <Button variant="ghost" className="capitalize font-medium">
                     blog
@@ -90,6 +110,16 @@ export function Header({ darkMode, onToggleDarkMode, scrollToSection }: HeaderPr
                     <Button variant="ghost" onClick={() => scrollToSection('servicios')} className="capitalize font-medium text-left justify-start h-12 text-base">
                       servicios
                     </Button>
+                    <Link href="/casos-exito">
+                      <Button variant="ghost" className="capitalize font-medium text-left justify-start h-12 text-base w-full">
+                        casos de éxito
+                      </Button>
+                    </Link>
+                    <Link href="/recursos">
+                      <Button variant="ghost" className="capitalize font-medium text-left justify-start h-12 text-base w-full">
+                        recursos
+                      </Button>
+                    </Link>
                     <Link href="/blog">
                       <Button variant="ghost" className="capitalize font-medium text-left justify-start h-12 text-base w-full">
                         blog
@@ -104,6 +134,16 @@ export function Header({ darkMode, onToggleDarkMode, scrollToSection }: HeaderPr
                     <Button variant="ghost" asChild className="capitalize font-medium text-left justify-start h-12 text-base">
                       <Link href="/#servicios">servicios</Link>
                     </Button>
+                    <Link href="/casos-exito">
+                      <Button variant="ghost" className="capitalize font-medium text-left justify-start h-12 text-base w-full">
+                        casos de éxito
+                      </Button>
+                    </Link>
+                    <Link href="/recursos">
+                      <Button variant="ghost" className="capitalize font-medium text-left justify-start h-12 text-base w-full">
+                        recursos
+                      </Button>
+                    </Link>
                     <Link href="/blog">
                       <Button variant="ghost" className="capitalize font-medium text-left justify-start h-12 text-base w-full">
                         blog
