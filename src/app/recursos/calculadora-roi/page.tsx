@@ -3,7 +3,7 @@
 import * as React from 'react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Calculator, TrendingUp, Clock, DollarSign, Users, Download, ChevronRight } from 'lucide-react'
+import { Calculator, TrendingUp, Clock, DollarSign, Download, ChevronRight } from 'lucide-react'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
 

@@ -2,7 +2,6 @@
 
 import * as React from 'react'
 import { Star, Quote } from 'lucide-react'
-import Image from 'next/image'
 
 interface Testimonial {
   name: string
@@ -85,7 +84,7 @@ export function Testimonials({ limit }: { limit?: number }) {
           </div>
 
           <p className="text-muted-foreground mb-6 relative z-10">
-            "{testimonial.content}"
+            &ldquo;{testimonial.content}&rdquo;
           </p>
 
           {testimonial.results && (

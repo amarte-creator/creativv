@@ -2,9 +2,7 @@
 
 import * as React from 'react'
 import { Button } from "@/components/ui/button"
-import { ArrowLeft, TrendingUp, Clock, DollarSign, Users, BarChart3, Zap, CheckCircle } from 'lucide-react'
-import Link from 'next/link'
-import Image from 'next/image'
+import { TrendingUp, Clock, DollarSign, Users, BarChart3, Zap, CheckCircle } from 'lucide-react'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
 
@@ -264,7 +262,7 @@ export default function CasosExitoPage() {
                         {/* Testimonial */}
                         <div className="bg-gradient-to-br from-primary/10 to-secondary/10 rounded-xl p-6 border border-primary/20">
                           <p className="text-muted-foreground italic mb-4">
-                            "{study.testimonial.quote}"
+                            &ldquo;{study.testimonial.quote}&rdquo;
                           </p>
                           <div className="flex items-center gap-3">
                             <div className="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center text-white font-bold">
