@@ -37,9 +37,9 @@ export default function RecursosPage() {
     localStorage.setItem('darkMode', newMode.toString())
   }
 
-  const handleDownload = (resourceTitle: string) => {
-    setSelectedResource(resourceTitle)
+  const handleDownload = (_resourceTitle: string) => {
     // In production, this would trigger actual download after email capture
+    // setSelectedResource(resourceTitle) - for future use
   }
 
   const freeResources = [
