@@ -6,6 +6,22 @@ import { Code, Globe, CheckCircle, ArrowLeft, Sun, Moon, Smartphone, Zap, Palett
 import Link from 'next/link'
 import Image from 'next/image'
 import { Footer } from '@/components/footer'
+import { SchemaOrg } from '@/components/schema-org'
+
+export const metadata = {
+  title: "Desarrollo Web Profesional - React, Next.js y Diseño UX/UI | Creativv",
+  description: "Desarrollo web profesional con React y Next.js. Sitios rápidos, optimizados para conversión y SEO. Diseño UX/UI moderno, responsive y escalable. E-commerce, landing pages y aplicaciones web. Consultoría gratis México.",
+  keywords: "desarrollo web, React México, Next.js desarrollo, diseño web profesional, UX/UI design, desarrollo e-commerce, landing pages, aplicaciones web, sitios web rápidos, desarrollo frontend",
+  openGraph: {
+    title: "Desarrollo Web Profesional - React, Next.js y Diseño UX/UI",
+    description: "Desarrollo web con React y Next.js. Sitios rápidos optimizados para conversión. Diseño UX/UI moderno.",
+    type: "website",
+    url: "https://servicioscreativos.online/servicios/desarrollo-web",
+  },
+  alternates: {
+    canonical: "https://servicioscreativos.online/servicios/desarrollo-web",
+  },
+}
 
 export default function DesarrolloWebPage() {
   const [darkMode, setDarkMode] = React.useState(false)
@@ -95,6 +111,7 @@ export default function DesarrolloWebPage() {
 
   return (
     <div className={`min-h-screen flex flex-col w-full ${mounted && darkMode ? 'dark' : ''}`}>
+      <SchemaOrg type="service" serviceType="web" />
       {/* Animated Background Elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         {/* Floating particles */}

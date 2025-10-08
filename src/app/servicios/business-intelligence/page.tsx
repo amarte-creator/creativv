@@ -6,6 +6,22 @@ import { BarChart2, TrendingUp, CheckCircle, ArrowLeft, Database, BarChart3, Sun
 import Link from 'next/link'
 import Image from 'next/image'
 import { Footer } from '@/components/footer'
+import { SchemaOrg } from '@/components/schema-org'
+
+export const metadata = {
+  title: "Dashboards Business Intelligence - BI Personalizados en Tiempo Real | Creativv",
+  description: "Dashboards de Business Intelligence personalizados con análisis predictivo e IA. Visualización de datos en tiempo real, reportes automatizados. Mejora decisiones estratégicas 60%. Consultoría BI gratuita México.",
+  keywords: "business intelligence dashboards, dashboards interactivos, BI México, análisis predictivo, visualización de datos, reportes automatizados, dashboards personalizados, inteligencia de negocios",
+  openGraph: {
+    title: "Dashboards Business Intelligence - BI Personalizados en Tiempo Real",
+    description: "Dashboards de BI personalizados con IA. Análisis predictivo, reportes en tiempo real. Mejora decisiones 60%.",
+    type: "website",
+    url: "https://servicioscreativos.online/servicios/business-intelligence",
+  },
+  alternates: {
+    canonical: "https://servicioscreativos.online/servicios/business-intelligence",
+  },
+}
 
 export default function BusinessIntelligencePage() {
   const [darkMode, setDarkMode] = React.useState(false)
@@ -95,6 +111,7 @@ export default function BusinessIntelligencePage() {
 
   return (
     <div className={`min-h-screen flex flex-col w-full ${mounted && darkMode ? 'dark' : ''}`}>
+      <SchemaOrg type="service" serviceType="bi" />
       {/* Header */}
       <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex h-16 items-center justify-between">

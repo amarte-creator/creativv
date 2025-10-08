@@ -1,0 +1,194 @@
+{
+  "name": "Creativvs - Templates de Workflows n8n",
+  "version": "1.0.0",
+  "description": "10 plantillas listas para importar en n8n: CRM, email marketing, gestión de leads y más",
+  "author": "Servicios Creativos",
+  "license": "MIT",
+  "workflows": [
+    {
+      "id": "crm-lead-automation",
+      "name": "1. Automatización de Leads en CRM",
+      "description": "Captura leads de múltiples fuentes y sincroniza con tu CRM automáticamente",
+      "nodes": [
+        "Webhook Trigger",
+        "Data Validation",
+        "CRM Integration (HubSpot/Salesforce)",
+        "Notification to Sales Team",
+        "Lead Enrichment"
+      ],
+      "integrations": ["HubSpot", "Salesforce", "Slack"],
+      "difficulty": "Intermedio",
+      "estimatedTime": "2 horas",
+      "roi": "Ahorra 10+ horas semanales"
+    },
+    {
+      "id": "email-marketing-automation",
+      "name": "2. Secuencia de Email Marketing",
+      "description": "Envía secuencias de emails personalizados basados en comportamiento del usuario",
+      "nodes": [
+        "Schedule Trigger",
+        "Database Query",
+        "Conditional Logic",
+        "Email Template",
+        "Send Email",
+        "Track Opens/Clicks"
+      ],
+      "integrations": ["Gmail", "SendGrid", "PostgreSQL"],
+      "difficulty": "Básico",
+      "estimatedTime": "1.5 horas",
+      "roi": "Aumenta engagement 35%"
+    },
+    {
+      "id": "invoice-automation",
+      "name": "3. Facturación Automática",
+      "description": "Genera y envía facturas automáticamente cuando se completa un pago",
+      "nodes": [
+        "Stripe Webhook",
+        "Customer Data Fetch",
+        "Invoice Generation",
+        "PDF Creation",
+        "Email Invoice",
+        "Save to Google Drive"
+      ],
+      "integrations": ["Stripe", "Google Drive", "Gmail"],
+      "difficulty": "Intermedio",
+      "estimatedTime": "3 horas",
+      "roi": "Ahorra 15 horas mensuales"
+    },
+    {
+      "id": "social-media-scheduler",
+      "name": "4. Programador de Redes Sociales",
+      "description": "Publica contenido en múltiples plataformas con un solo click",
+      "nodes": [
+        "Google Sheets Trigger",
+        "Content Parser",
+        "Image Optimizer",
+        "Multi-Platform Publisher",
+        "Analytics Tracker"
+      ],
+      "integrations": ["Twitter", "LinkedIn", "Facebook", "Google Sheets"],
+      "difficulty": "Básico",
+      "estimatedTime": "2 horas",
+      "roi": "Ahorra 8 horas semanales"
+    },
+    {
+      "id": "customer-support-ai",
+      "name": "5. Soporte al Cliente con IA",
+      "description": "Responde preguntas frecuentes automáticamente con ChatGPT",
+      "nodes": [
+        "Email/Chat Webhook",
+        "Text Classification",
+        "OpenAI ChatGPT",
+        "Response Formatter",
+        "Send Reply",
+        "Escalation Logic"
+      ],
+      "integrations": ["OpenAI", "Gmail", "Zendesk"],
+      "difficulty": "Avanzado",
+      "estimatedTime": "4 horas",
+      "roi": "Reduce tickets 40%"
+    },
+    {
+      "id": "data-sync-multiple-platforms",
+      "name": "6. Sincronización de Datos Multi-Plataforma",
+      "description": "Mantén tus datos sincronizados entre Sheets, Airtable, y base de datos",
+      "nodes": [
+        "Schedule Trigger (Every 15 min)",
+        "Source Data Fetch",
+        "Data Transformation",
+        "Conflict Resolution",
+        "Multi-Platform Update",
+        "Error Handler"
+      ],
+      "integrations": ["Google Sheets", "Airtable", "PostgreSQL"],
+      "difficulty": "Intermedio",
+      "estimatedTime": "3 horas",
+      "roi": "Elimina errores de datos manuales"
+    },
+    {
+      "id": "lead-scoring-ai",
+      "name": "7. Lead Scoring con IA",
+      "description": "Califica automáticamente la calidad de leads usando machine learning",
+      "nodes": [
+        "New Lead Trigger",
+        "Data Enrichment API",
+        "AI Scoring Model",
+        "Priority Assignment",
+        "Route to Sales Rep",
+        "CRM Update"
+      ],
+      "integrations": ["OpenAI", "Clearbit", "HubSpot"],
+      "difficulty": "Avanzado",
+      "estimatedTime": "5 horas",
+      "roi": "Aumenta conversión 25%"
+    },
+    {
+      "id": "expense-tracking",
+      "name": "8. Seguimiento de Gastos",
+      "description": "Captura recibos por email y actualiza automáticamente tu sistema contable",
+      "nodes": [
+        "Email Trigger",
+        "Attachment Extractor",
+        "OCR Processing",
+        "Data Extraction",
+        "Accounting Software Update",
+        "Approval Workflow"
+      ],
+      "integrations": ["Gmail", "QuickBooks", "Google Vision API"],
+      "difficulty": "Intermedio",
+      "estimatedTime": "3 horas",
+      "roi": "Ahorra 12 horas mensuales"
+    },
+    {
+      "id": "meeting-scheduler",
+      "name": "9. Coordinador de Reuniones Inteligente",
+      "description": "Encuentra horarios disponibles y agenda reuniones automáticamente",
+      "nodes": [
+        "Email Parser",
+        "Calendar Availability Check",
+        "AI Meeting Suggestion",
+        "Calendar Invitation",
+        "Confirmation Emails",
+        "Reminder System"
+      ],
+      "integrations": ["Google Calendar", "Gmail", "OpenAI"],
+      "difficulty": "Intermedio",
+      "estimatedTime": "2.5 horas",
+      "roi": "Ahorra 5 horas semanales"
+    },
+    {
+      "id": "content-generation",
+      "name": "10. Generación de Contenido con IA",
+      "description": "Crea artículos de blog, posts sociales, y newsletters automáticamente",
+      "nodes": [
+        "Schedule/Manual Trigger",
+        "Topic Generator",
+        "ChatGPT Content Writer",
+        "Image Generation (DALL-E)",
+        "SEO Optimizer",
+        "Multi-Channel Publisher"
+      ],
+      "integrations": ["OpenAI", "WordPress", "Medium", "Buffer"],
+      "difficulty": "Avanzado",
+      "estimatedTime": "4 horas",
+      "roi": "Genera 20+ piezas de contenido/mes"
+    }
+  ],
+  "installation": {
+    "steps": [
+      "1. Abre n8n en tu navegador",
+      "2. Ve a 'Workflows' > 'Import from File'",
+      "3. Selecciona el workflow JSON que deseas importar",
+      "4. Configura tus credenciales para cada integración",
+      "5. Activa el workflow",
+      "6. Prueba con datos de ejemplo"
+    ]
+  },
+  "support": {
+    "documentation": "https://servicioscreativos.online/recursos",
+    "email": "soporte@servicioscreativos.online",
+    "consultation": "https://calendly.com/avilamolinaadrian/30min"
+  },
+  "updates": "Recibirás actualizaciones gratuitas por email cada vez que agreguemos nuevos templates"
+}
+

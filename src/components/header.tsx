@@ -19,8 +19,8 @@ interface HeaderProps {
 
 export function Header({ darkMode, onToggleDarkMode, scrollToSection }: HeaderProps) {
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex h-16 items-center justify-between">
+    <header className="sticky top-0 z-50 w-full border-b border-border/20 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/80">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex h-20 items-center justify-between">
         <div className="flex items-center space-x-4">
           <Link href="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
             <Image 
@@ -32,53 +32,53 @@ export function Header({ darkMode, onToggleDarkMode, scrollToSection }: HeaderPr
             />
             <span className="text-xl font-bold gradient-text">Creativv</span>
           </Link>
-          <nav className="hidden md:flex space-x-6">
+          <nav className="hidden md:flex space-x-1">
             {scrollToSection ? (
               <>
-                <Button variant="ghost" onClick={() => scrollToSection('servicios')} className="capitalize font-medium">
-                  servicios
+                <Button variant="ghost" onClick={() => scrollToSection('servicios')} className="capitalize font-medium hover:bg-primary/5 transition-colors">
+                  Servicios
                 </Button>
                 <Link href="/casos-exito">
-                  <Button variant="ghost" className="capitalize font-medium">
-                    casos de éxito
+                  <Button variant="ghost" className="capitalize font-medium hover:bg-primary/5 transition-colors">
+                    Casos de Éxito
                   </Button>
                 </Link>
                 <Link href="/recursos">
-                  <Button variant="ghost" className="capitalize font-medium">
-                    recursos
+                  <Button variant="ghost" className="capitalize font-medium hover:bg-primary/5 transition-colors">
+                    Recursos
                   </Button>
                 </Link>
                 <Link href="/blog">
-                  <Button variant="ghost" className="capitalize font-medium">
-                    blog
+                  <Button variant="ghost" className="capitalize font-medium hover:bg-primary/5 transition-colors">
+                    Blog
                   </Button>
                 </Link>
-                <Button variant="ghost" onClick={() => scrollToSection('contacto')} className="capitalize font-medium">
-                  contacto
+                <Button variant="ghost" onClick={() => scrollToSection('contacto')} className="capitalize font-medium hover:bg-primary/5 transition-colors">
+                  Contacto
                 </Button>
               </>
             ) : (
               <>
-                <Button variant="ghost" asChild className="capitalize font-medium">
-                  <Link href="/#servicios">servicios</Link>
+                <Button variant="ghost" asChild className="capitalize font-medium hover:bg-primary/5 transition-colors">
+                  <Link href="/#servicios">Servicios</Link>
                 </Button>
                 <Link href="/casos-exito">
-                  <Button variant="ghost" className="capitalize font-medium">
-                    casos de éxito
+                  <Button variant="ghost" className="capitalize font-medium hover:bg-primary/5 transition-colors">
+                    Casos de Éxito
                   </Button>
                 </Link>
                 <Link href="/recursos">
-                  <Button variant="ghost" className="capitalize font-medium">
-                    recursos
+                  <Button variant="ghost" className="capitalize font-medium hover:bg-primary/5 transition-colors">
+                    Recursos
                   </Button>
                 </Link>
                 <Link href="/blog">
-                  <Button variant="ghost" className="capitalize font-medium">
-                    blog
+                  <Button variant="ghost" className="capitalize font-medium hover:bg-primary/5 transition-colors">
+                    Blog
                   </Button>
                 </Link>
-                <Button variant="ghost" asChild className="capitalize font-medium">
-                  <Link href="/#contacto">contacto</Link>
+                <Button variant="ghost" asChild className="capitalize font-medium hover:bg-primary/5 transition-colors">
+                  <Link href="/#contacto">Contacto</Link>
                 </Button>
               </>
             )}

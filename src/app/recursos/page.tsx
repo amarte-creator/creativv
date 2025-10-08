@@ -6,12 +6,19 @@ import { Input } from "@/components/ui/input"
 import { Download, BookOpen, Calculator, FileText, Video, Lightbulb, ArrowRight, CheckCircle, Mail } from 'lucide-react'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
+import { DownloadModal } from '@/components/download-modal'
 import Link from 'next/link'
 
 export default function RecursosPage() {
   const [darkMode, setDarkMode] = React.useState(false)
   const [mounted, setMounted] = React.useState(false)
   const [email, setEmail] = React.useState('')
+  const [isDownloadModalOpen, setIsDownloadModalOpen] = React.useState(false)
+  const [selectedResource, setSelectedResource] = React.useState<{
+    title: string
+    type: string
+    file: string
+  } | null>(null)
 
   React.useEffect(() => {
     setMounted(true)
@@ -37,18 +44,19 @@ export default function RecursosPage() {
     localStorage.setItem('darkMode', newMode.toString())
   }
 
-  const handleDownload = (_resourceTitle: string) => {
-    // In production, this would trigger actual download after email capture
-    // setSelectedResource(resourceTitle) - for future use
+  const handleDownload = (resourceTitle: string, resourceType: string, resourceFile: string) => {
+    setSelectedResource({ title: resourceTitle, type: resourceType, file: resourceFile })
+    setIsDownloadModalOpen(true)
   }
 
   const freeResources = [
     {
       title: "Guía Completa de Automatización con n8n",
       description: "Aprende a automatizar procesos empresariales paso a paso. Incluye 15 workflows listos para usar.",
-      type: "PDF Guide",
+      type: "Guía PDF",
       icon: <BookOpen className="h-6 w-6" />,
       color: "from-blue-500 to-cyan-500",
+      file: "guia-completa-automatizacion-n8n.pdf",
       benefits: [
         "15 workflows n8n pre-configurados",
         "Casos de uso reales por industria",
@@ -76,6 +84,7 @@ export default function RecursosPage() {
       type: "JSON Templates",
       icon: <FileText className="h-6 w-6" />,
       color: "from-orange-500 to-red-500",
+      file: "n8n-workflows-templates.json",
       benefits: [
         "10 templates profesionales",
         "Documentación completa",
@@ -89,6 +98,7 @@ export default function RecursosPage() {
       type: "PDF Checklist",
       icon: <CheckCircle className="h-6 w-6" />,
       color: "from-green-500 to-emerald-500",
+      file: "checklist-bi-readiness.pdf",
       benefits: [
         "Autoevaluación en 10 minutos",
         "Recomendaciones personalizadas",
@@ -102,6 +112,7 @@ export default function RecursosPage() {
       type: "Video Series",
       icon: <Video className="h-6 w-6" />,
       color: "from-indigo-500 to-blue-500",
+      comingSoon: true,
       benefits: [
         "5 videos paso a paso",
         "Ejemplos de código incluidos",
@@ -112,9 +123,10 @@ export default function RecursosPage() {
     {
       title: "eBook: 50 Procesos Que Debes Automatizar",
       description: "Los procesos más comunes que empresas exitosas automatizan primero, con ROI verificado.",
-      type: "eBook",
+      type: "eBook PDF",
       icon: <Lightbulb className="h-6 w-6" />,
       color: "from-yellow-500 to-orange-500",
+      file: "ebook-50-procesos-automatizar.pdf",
       benefits: [
         "50 procesos priorizados por ROI",
         "Herramientas recomendadas",
@@ -195,10 +207,17 @@ export default function RecursosPage() {
                           Usar Herramienta <ArrowRight className="ml-2 h-4 w-4" />
                         </Link>
                       </Button>
+                    ) : resource.comingSoon ? (
+                      <Button 
+                        className="w-full btn-primary group-hover:scale-105 transition-transform"
+                        disabled
+                      >
+                        Próximamente
+                      </Button>
                     ) : (
                       <Button 
                         className="w-full btn-primary group-hover:scale-105 transition-transform"
-                        onClick={() => handleDownload(resource.title)}
+                        onClick={() => handleDownload(resource.title, resource.type, resource.file || '')}
                       >
                         Descargar Gratis <Download className="ml-2 h-4 w-4" />
                       </Button>
@@ -312,6 +331,19 @@ export default function RecursosPage() {
       </main>
 
       <Footer />
+
+      {selectedResource && (
+        <DownloadModal
+          isOpen={isDownloadModalOpen}
+          onClose={() => {
+            setIsDownloadModalOpen(false)
+            setSelectedResource(null)
+          }}
+          resourceTitle={selectedResource.title}
+          resourceType={selectedResource.type}
+          resourceFile={selectedResource.file}
+        />
+      )}
     </div>
   )
 }

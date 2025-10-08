@@ -16,21 +16,70 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Creativv - Transformamos ideas en impacto digital",
-  description: "Expertos en transformación digital. Automatizaciones con IA, desarrollo BI y desarrollo web para escalar tu negocio.",
-  keywords: "transformación digital, automatización, IA, business intelligence, desarrollo web, n8n",
+  metadataBase: new URL('https://servicioscreativos.online'),
+  title: {
+    default: "Automatización con IA y n8n | Business Intelligence | Creativv México",
+    template: "%s | Creativv"
+  },
+  description: "Especialistas en automatización empresarial con IA y n8n, dashboards de Business Intelligence y desarrollo web. Reducimos tareas repetitivas hasta 80% y mejoramos tus decisiones de negocio. Consultoría gratuita.",
+  keywords: [
+    "automatización con n8n",
+    "automatización IA empresas",
+    "business intelligence dashboards",
+    "flujos de trabajo automatizados",
+    "dashboards interactivos México",
+    "automatizar procesos empresariales",
+    "consultoría automatización",
+    "n8n México",
+    "workflows inteligentes",
+    "inteligencia artificial negocios",
+    "análisis de datos empresarial",
+    "desarrollo web automatizado",
+    "integración APIs empresas"
+  ],
   authors: [{ name: "Creativv" }],
   creator: "Creativv",
+  publisher: "Creativv",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  alternates: {
+    canonical: 'https://servicioscreativos.online',
+  },
   openGraph: {
-    title: "Creativv - Transformamos ideas en impacto digital",
-    description: "Expertos en transformación digital. Automatizaciones con IA, desarrollo BI y desarrollo web para escalar tu negocio.",
+    title: "Automatización con IA y n8n | Business Intelligence | Creativv",
+    description: "Automatiza tu negocio con IA y n8n. Dashboards inteligentes de BI. Reducimos tareas repetitivas hasta 80%. Consultoría gratuita en México.",
     type: "website",
-    locale: "es_ES",
+    locale: "es_MX",
+    url: "https://servicioscreativos.online",
+    siteName: "Creativv",
+    images: [
+      {
+        url: "/creativv-lg.png",
+        width: 1200,
+        height: 630,
+        alt: "Creativv - Automatización con IA y Business Intelligence",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Creativv - Transformamos ideas en impacto digital",
-    description: "Expertos en transformación digital. Automatizaciones con IA, desarrollo BI y desarrollo web para escalar tu negocio.",
+    title: "Automatización con IA y n8n | Business Intelligence | Creativv",
+    description: "Automatiza tu negocio con IA y n8n. Dashboards inteligentes de BI. Reducimos tareas repetitivas hasta 80%.",
+    images: ["/creativv-lg.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
   icons: {
     icon: [

@@ -28,104 +28,79 @@ interface CaseStudy {
 
 const caseStudies: CaseStudy[] = [
   {
-    id: "techflow-automation",
-    title: "Automatización de Proceso de Ventas con IA",
-    client: "TechFlow Solutions",
-    industry: "Tecnología B2B",
-    challenge: "TechFlow procesaba manualmente cada lead, perdiendo 30 horas semanales en tareas repetitivas. Los leads se perdían en el proceso y la tasa de cierre era solo del 12%.",
+    id: "constructora-samer",
+    title: "Digitalización y Dashboard BI para Constructora",
+    client: "Constructora Samer",
+    industry: "Construcción",
+    challenge: "Constructora Samer gestionaba múltiples proyectos simultáneos sin visibilidad clara del progreso, costos y recursos. Los reportes manuales tomaban días y las decisiones se retrasaban, afectando la rentabilidad de los proyectos.",
     solution: [
-      "Implementación de n8n para automatizar captura y calificación de leads",
-      "Integración de ChatGPT para respuestas automáticas personalizadas",
-      "Dashboard de BI para seguimiento en tiempo real de pipeline",
-      "Automatización de seguimientos y recordatorios"
+      "Digitalización completa de procesos de obra y administración",
+      "Dashboard de BI integrado con datos de proyectos, costos y recursos",
+      "Sistema de alertas automáticas para desviaciones de presupuesto",
+      "Reportes en tiempo real para cada proyecto y análisis financiero"
     ],
     results: [
-      { metric: "Tiempo ahorrado", value: "25h/semana", icon: <Clock className="h-6 w-6" /> },
-      { metric: "Aumento en conversión", value: "40%", icon: <TrendingUp className="h-6 w-6" /> },
-      { metric: "ROI mensual", value: "$8,500", icon: <DollarSign className="h-6 w-6" /> },
-      { metric: "Leads procesados", value: "300% más", icon: <Users className="h-6 w-6" /> }
+      { metric: "Tiempo de reporting", value: "85% menos", icon: <Clock className="h-6 w-6" /> },
+      { metric: "Control de costos", value: "+45%", icon: <DollarSign className="h-6 w-6" /> },
+      { metric: "Visibilidad proyectos", value: "100%", icon: <BarChart3 className="h-6 w-6" /> },
+      { metric: "Rentabilidad", value: "+28%", icon: <TrendingUp className="h-6 w-6" /> }
     ],
     testimonial: {
-      quote: "Creativv transformó completamente nuestro proceso de ventas. La automatización con IA nos permitió escalar sin contratar más personal.",
-      author: "Carlos Mendoza",
-      role: "CEO, TechFlow Solutions"
+      quote: "Ahora sabemos exactamente dónde está cada proyecto en tiempo real. Las desviaciones se detectan de inmediato y podemos tomar decisiones informadas rápidamente.",
+      author: "Ing. Samuel Ramírez",
+      role: "Director General, Constructora Samer"
     },
-    tags: ["Automatización", "IA", "n8n", "CRM"]
+    tags: ["Business Intelligence", "Digitalización", "Dashboards", "Construcción"]
   },
   {
-    id: "innovatech-bi",
-    title: "Dashboard de BI para Toma de Decisiones Estratégicas",
-    client: "Innovatech México",
-    industry: "Manufactura",
-    challenge: "Datos dispersos en múltiples sistemas sin visibilidad consolidada. Las decisiones se tomaban basadas en intuición, no en datos reales.",
+    id: "vistacampo",
+    title: "Diseño Web Moderno para Centro Terapéutico",
+    client: "Vistacampo",
+    industry: "Salud y Bienestar",
+    challenge: "Vistacampo necesitaba una presencia digital moderna que reflejara la calidad de sus servicios terapéuticos. Su sitio antiguo no mostraba adecuadamente los tratamientos y perdían pacientes potenciales por falta de funcionalidad.",
     solution: [
-      "Integración de datos de ERP, CRM y sistemas de producción",
-      "Desarrollo de dashboard interactivo con análisis predictivo",
-      "Implementación de alertas automáticas para KPIs críticos",
-      "Reportes automatizados diarios para la dirección"
+      "Diseño web moderno y responsivo con recorrido virtual de las instalaciones",
+      "Catálogo de servicios terapéuticos con descripciones detalladas",
+      "Integración de formularios con CRM para captura de leads",
+      "Sistema de agendamiento de citas y consultas en línea"
     ],
     results: [
-      { metric: "Tiempo de reporting", value: "90% menos", icon: <Clock className="h-6 w-6" /> },
-      { metric: "Decisiones basadas en datos", value: "100%", icon: <BarChart3 className="h-6 w-6" /> },
-      { metric: "ROI", value: "2 meses", icon: <DollarSign className="h-6 w-6" /> },
-      { metric: "Eficiencia operativa", value: "+35%", icon: <Zap className="h-6 w-6" /> }
+      { metric: "Consultas generadas", value: "+210%", icon: <Users className="h-6 w-6" /> },
+      { metric: "Tiempo en sitio", value: "4.5 min", icon: <Clock className="h-6 w-6" /> },
+      { metric: "Conversión", value: "+156%", icon: <TrendingUp className="h-6 w-6" /> },
+      { metric: "Citas agendadas", value: "+180%", icon: <CheckCircle className="h-6 w-6" /> }
     ],
     testimonial: {
-      quote: "Ahora vemos todo nuestro negocio en un solo lugar. Las decisiones que antes tomaban días, ahora las tomamos en minutos.",
-      author: "María González",
-      role: "Directora de Operaciones, Innovatech"
+      quote: "El nuevo sitio web ha sido un cambio total. Los pacientes llegan mejor informados a las consultas y nuestro equipo recibe leads de mucha mejor calidad.",
+      author: "Dra. Patricia Campos",
+      role: "Directora, Vistacampo"
     },
-    tags: ["Business Intelligence", "Dashboards", "Analytics", "Predictivo"]
+    tags: ["Desarrollo Web", "Diseño UI/UX", "Salud y Bienestar", "Lead Generation"]
   },
   {
-    id: "growthlab-ecosystem",
-    title: "Ecosistema Digital Completo con Automatizaciones",
-    client: "GrowthLab",
-    industry: "Consultoría",
-    challenge: "Startup en crecimiento necesitaba presencia web profesional y automatizar todos sus procesos desde cero para escalar eficientemente.",
+    id: "artistheway",
+    title: "E-commerce para Arte Digital",
+    client: "artistheway",
+    industry: "Arte Digital",
+    challenge: "artistheway quería vender arte digital en línea pero necesitaba una plataforma que protegiera las obras, gestionara licencias digitales y ofreciera una experiencia premium a los coleccionistas.",
     solution: [
-      "Desarrollo de sitio web moderno con integración de calendario",
-      "Automatización completa de onboarding de clientes",
-      "Sistema de facturación y pagos automatizado",
-      "Integración de n8n con todas las herramientas de trabajo"
+      "Desarrollo de e-commerce especializado para arte digital",
+      "Sistema de protección DRM y entrega segura de archivos digitales",
+      "Gestión de licencias y derechos de uso automatizada",
+      "Galería interactiva con vista previa y sistema de pagos integrado"
     ],
     results: [
-      { metric: "Ahorro anual", value: "$45,000", icon: <DollarSign className="h-6 w-6" /> },
-      { metric: "Tiempo administrativo", value: "-80%", icon: <Clock className="h-6 w-6" /> },
-      { metric: "Nuevos clientes", value: "+250%", icon: <Users className="h-6 w-6" /> },
-      { metric: "Satisfacción cliente", value: "4.9/5", icon: <TrendingUp className="h-6 w-6" /> }
+      { metric: "Ventas mensuales", value: "+340%", icon: <DollarSign className="h-6 w-6" /> },
+      { metric: "Artistas registrados", value: "150+", icon: <Users className="h-6 w-6" /> },
+      { metric: "Ticket promedio", value: "+95%", icon: <TrendingUp className="h-6 w-6" /> },
+      { metric: "Satisfacción", value: "4.8/5", icon: <CheckCircle className="h-6 w-6" /> }
     ],
     testimonial: {
-      quote: "Creativv nos dio las herramientas para escalar como empresa grande desde el día uno. La inversión se pagó sola en 3 meses.",
-      author: "Roberto Silva",
-      role: "Fundador, GrowthLab"
+      quote: "Creativv entendió perfectamente las necesidades del mercado de arte digital. La plataforma protege nuestras obras y nos ha permitido escalar las ventas de manera increíble.",
+      author: "Laura Méndez",
+      role: "Fundadora, artistheway"
     },
-    tags: ["Desarrollo Web", "Automatización", "Ecosistema Digital"]
-  },
-  {
-    id: "digitalventures-crm",
-    title: "Integración Inteligente de CRM con Marketing",
-    client: "Digital Ventures",
-    industry: "Marketing Digital",
-    challenge: "Leads de múltiples fuentes llegaban sin organización. El equipo de ventas perdía oportunidades por falta de seguimiento oportuno.",
-    solution: [
-      "Integración de n8n con HubSpot, Facebook Ads y Google Ads",
-      "Sistema de calificación automática de leads con IA",
-      "Asignación inteligente a vendedores según perfil",
-      "Seguimientos automatizados personalizados"
-    ],
-    results: [
-      { metric: "Eficiencia ventas", value: "300%", icon: <TrendingUp className="h-6 w-6" /> },
-      { metric: "Velocidad respuesta", value: "2 min", icon: <Clock className="h-6 w-6" /> },
-      { metric: "Tasa conversión", value: "+85%", icon: <Users className="h-6 w-6" /> },
-      { metric: "Leads perdidos", value: "0%", icon: <CheckCircle className="h-6 w-6" /> }
-    ],
-    testimonial: {
-      quote: "Ahora cada lead que llega se procesa perfectamente. Nuestro equipo solo se enfoca en cerrar ventas, no en tareas manuales.",
-      author: "Ana Martínez",
-      role: "VP de Marketing, Digital Ventures"
-    },
-    tags: ["CRM", "IA", "Marketing Automation", "n8n"]
+    tags: ["E-commerce", "Arte Digital", "Desarrollo Web", "Pagos en línea"]
   }
 ]
 

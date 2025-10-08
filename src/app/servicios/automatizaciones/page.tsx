@@ -8,6 +8,22 @@ import Image from 'next/image'
 import { Footer } from '@/components/footer'
 import { FAQ, automationFAQs, pricingFAQs } from '@/components/faq'
 import { Testimonials } from '@/components/testimonials'
+import { SchemaOrg } from '@/components/schema-org'
+
+export const metadata = {
+  title: "Automatización con IA y n8n - Workflows Inteligentes | Creativv",
+  description: "Automatiza procesos empresariales con n8n e inteligencia artificial. Reducimos tareas repetitivas hasta 80%, ahorramos 20+ horas semanales. Integración con 200+ apps. Consultoría gratuita en México.",
+  keywords: "automatización n8n, automatización IA, workflows automatizados, n8n México, automatizar procesos, integración n8n, flujos de trabajo inteligentes, automatización empresarial",
+  openGraph: {
+    title: "Automatización con IA y n8n - Workflows Inteligentes",
+    description: "Automatiza procesos con n8n e IA. Reducimos 80% de tareas repetitivas. 200+ integraciones disponibles.",
+    type: "website",
+    url: "https://servicioscreativos.online/servicios/automatizaciones",
+  },
+  alternates: {
+    canonical: "https://servicioscreativos.online/servicios/automatizaciones",
+  },
+}
 
 export default function AutomatizacionesPage() {
   const [darkMode, setDarkMode] = React.useState(false)
@@ -97,6 +113,7 @@ export default function AutomatizacionesPage() {
 
   return (
     <div className={`min-h-screen flex flex-col w-full ${mounted && darkMode ? 'dark' : ''}`}>
+      <SchemaOrg type="service" serviceType="automation" />
       {/* Header */}
       <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex h-16 items-center justify-between">

@@ -15,36 +15,28 @@ interface Testimonial {
 
 const testimonials: Testimonial[] = [
   {
-    name: "Carlos Mendoza",
-    role: "CEO",
-    company: "TechFlow Solutions",
-    content: "Creativv transformó completamente nuestros procesos de ventas. La automatización con IA que implementaron nos ahorró 25 horas semanales y aumentó nuestra tasa de cierre en un 40%.",
+    name: "Ing. Samuel Ramírez",
+    role: "Director General",
+    company: "Constructora Samer",
+    content: "Ahora sabemos exactamente dónde está cada proyecto en tiempo real. Las desviaciones se detectan de inmediato y podemos tomar decisiones informadas rápidamente. La digitalización cambió completamente nuestra forma de trabajar.",
     rating: 5,
-    results: "40% aumento en conversiones"
+    results: "85% menos tiempo en reportes"
   },
   {
-    name: "María González",
-    role: "Directora de Operaciones",
-    company: "Innovatech México",
-    content: "Los dashboards de BI que desarrollaron nos dieron visibilidad completa de nuestro negocio. Ahora tomamos decisiones basadas en datos en tiempo real. El ROI fue visible en menos de 2 meses.",
+    name: "Arq. Patricia Campos",
+    role: "Directora de Marketing",
+    company: "Vistacampo",
+    content: "El nuevo sitio web ha sido un cambio total. Los clientes llegan mejor informados a las visitas y nuestro equipo de ventas recibe leads de mucha mejor calidad. Los resultados superaron nuestras expectativas.",
     rating: 5,
-    results: "ROI en 2 meses"
+    results: "+210% leads generados"
   },
   {
-    name: "Roberto Silva",
-    role: "Fundador",
-    company: "GrowthLab",
-    content: "Trabajar con Creativv fue excepcional. No solo entregaron un sitio web increíble, sino que implementaron automatizaciones que nos ahorraron $45,000 al año en costos operativos.",
+    name: "Laura Méndez",
+    role: "Fundadora",
+    company: "artistheway",
+    content: "Creativv entendió perfectamente las necesidades del mercado de arte digital. La plataforma protege nuestras obras y nos ha permitido escalar las ventas de manera increíble. Estamos muy contentos con los resultados.",
     rating: 5,
-    results: "$45K ahorrados anualmente"
-  },
-  {
-    name: "Ana Martínez",
-    role: "VP de Marketing",
-    company: "Digital Ventures",
-    content: "La integración de n8n con nuestro CRM fue perfecta. Ahora cada lead se procesa automáticamente, se califica y se asigna al vendedor correcto. Nuestra eficiencia aumentó 300%.",
-    rating: 5,
-    results: "300% más eficiencia"
+    results: "+340% en ventas mensuales"
   },
   {
     name: "Luis Hernández",
@@ -61,6 +53,14 @@ const testimonials: Testimonial[] = [
     content: "El equipo de Creativv es profesional, proactivo y orientado a resultados. El dashboard de BI que construyeron nos dio insights que nunca supimos que necesitábamos. Excelente inversión.",
     rating: 5,
     results: "Insights accionables diarios"
+  },
+  {
+    name: "Ana Martínez",
+    role: "VP de Marketing",
+    company: "Digital Ventures",
+    content: "La integración de n8n con nuestro CRM fue perfecta. Ahora cada lead se procesa automáticamente, se califica y se asigna al vendedor correcto. Nuestra eficiencia aumentó 300%.",
+    rating: 5,
+    results: "300% más eficiencia"
   }
 ]
 
