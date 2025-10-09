@@ -16,6 +16,32 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    id: 10,
+    title: "Cómo Automatizar Procesos Empresariales con n8n: Guía Completa 2025",
+    excerpt: "Descubre las mejores estrategias para implementar automatizaciones inteligentes con n8n e IA que reduzcan costos hasta 80% y aumenten la productividad. Incluye casos de éxito, ROI y paso a paso.",
+    slug: "como-automatizar-procesos-empresariales-n8n",
+    category: "Automatización",
+    readTime: "25 min",
+    publishDate: "2025-01-20",
+    author: "Equipo Creativv",
+    featured: true,
+    tags: ["n8n", "automatización", "IA", "workflows", "productividad", "ROI"],
+    image: "https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a?w=800&h=400&fit=crop&crop=center"
+  },
+  {
+    id: 11,
+    title: "Dashboards de Business Intelligence: Guía Completa para Tomar Decisiones Basadas en Datos",
+    excerpt: "Aprende a crear dashboards de BI personalizados con análisis predictivo e IA. Mejora decisiones 60%, reduce tiempo de análisis 75%. Incluye comparativa de herramientas y casos de éxito.",
+    slug: "dashboards-business-intelligence-guia-completa",
+    category: "Business Intelligence",
+    readTime: "28 min",
+    publishDate: "2025-01-18",
+    author: "Equipo Creativv",
+    featured: true,
+    tags: ["business intelligence", "dashboards", "BI", "datos", "analytics", "visualización"],
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=400&fit=crop&crop=center"
+  },
+  {
     id: 1,
     title: "Cómo automatizar tu negocio con n8n y IA en 2024",
     excerpt: "Descubre las mejores estrategias para implementar automatizaciones inteligentes que reduzcan costos y aumenten la productividad de tu empresa.",
@@ -24,11 +50,10 @@ export const blogPosts: BlogPost[] = [
     readTime: "8 min",
     publishDate: "2024-01-15",
     author: "Equipo Creativv",
-    featured: true,
+    featured: false,
     tags: ["n8n", "IA", "automatización", "productividad"],
-    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=400&fit=crop&crop=center",
-    content: `...`,
-    hidden: true
+    image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&h=400&fit=crop&crop=center",
+    content: `...`
   },
   {
     id: 2,
@@ -39,7 +64,7 @@ export const blogPosts: BlogPost[] = [
     readTime: "12 min",
     publishDate: "2024-01-10",
     author: "Equipo Creativv",
-    featured: true,
+    featured: false,
     tags: ["BI", "datos", "analytics", "decisiones"],
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=400&fit=crop&crop=center",
     content: `...`
@@ -55,9 +80,8 @@ export const blogPosts: BlogPost[] = [
     author: "Equipo Creativv",
     featured: false,
     tags: ["React", "Next.js", "desarrollo web", "frontend"],
-    image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&h=400&fit=crop&crop=center",
-    content: `...`,
-    hidden: true
+    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=400&fit=crop&crop=center",
+    content: `...`
   },
   {
     id: 4,
@@ -70,9 +94,8 @@ export const blogPosts: BlogPost[] = [
     author: "Equipo Creativv",
     featured: false,
     tags: ["SEO", "optimización", "tráfico", "posicionamiento"],
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=400&fit=crop&crop=center",
-    content: `...`,
-    hidden: true
+    image: "https://images.unsplash.com/photo-1562577309-4932fdd64cd1?w=800&h=400&fit=crop&crop=center",
+    content: `...`
   },
   {
     id: 5,
@@ -85,9 +108,8 @@ export const blogPosts: BlogPost[] = [
     author: "Equipo Creativv",
     featured: false,
     tags: ["APIs", "integración", "automatización", "herramientas"],
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=400&fit=crop&crop=center",
-    content: `...`,
-    hidden: true
+    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=400&fit=crop&crop=center",
+    content: `...`
   },
   {
     id: 6,
@@ -100,7 +122,7 @@ export const blogPosts: BlogPost[] = [
     author: "Equipo Creativv",
     featured: false,
     tags: ["dashboards", "visualización", "datos", "BI"],
-    image: "https://images.unsplash.com/photo-1543286386-713bdd548da4?w=800&h=400&fit=crop&crop=center",
+    image: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=800&h=400&fit=crop&crop=center",
     content: `...`
   },
   {
@@ -114,9 +136,8 @@ export const blogPosts: BlogPost[] = [
     author: "Equipo Creativv",
     featured: false,
     tags: ["Machine Learning", "IA", "casos de uso", "negocios"],
-    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=400&fit=crop&crop=center",
-    content: `...`,
-    hidden: true
+    image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&h=400&fit=crop&crop=center",
+    content: `...`
   },
   {
     id: 8,
@@ -129,9 +150,8 @@ export const blogPosts: BlogPost[] = [
     author: "Equipo Creativv",
     featured: false,
     tags: ["microservicios", "arquitectura", "escalabilidad", "desarrollo"],
-    image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&h=400&fit=crop&crop=center",
-    content: `...`,
-    hidden: true
+    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=400&fit=crop&crop=center",
+    content: `...`
   },
   {
     id: 9,
@@ -144,8 +164,7 @@ export const blogPosts: BlogPost[] = [
     author: "Equipo Creativv",
     featured: false,
     tags: ["analytics", "Google Analytics", "datos", "usuarios"],
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=400&fit=crop&crop=center",
-    content: `...`,
-    hidden: true
+    image: "https://images.unsplash.com/photo-1543286386-713bdd548da4?w=800&h=400&fit=crop&crop=center",
+    content: `...`
   }
 ];

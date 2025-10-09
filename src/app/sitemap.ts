@@ -59,6 +59,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      url: `${baseUrl}/blog/como-automatizar-procesos-empresariales-n8n`,
+      lastModified: new Date('2025-01-20'),
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/blog/dashboards-business-intelligence-guia-completa`,
+      lastModified: new Date('2025-01-18'),
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    {
       url: `${baseUrl}/blog/automatizar-negocio-n8n-ia-2024`,
       lastModified: new Date('2024-01-15'),
       changeFrequency: 'monthly',
